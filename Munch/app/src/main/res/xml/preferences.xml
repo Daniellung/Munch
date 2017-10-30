@@ -1,0 +1,14 @@
+<Preferences xmlns:android="http://schemas.android.com/apk/res/android">
+    <SwitchPreference
+        android:key="pref_push_notifications"
+        android:title="@string/pref_push_notifications"
+        android:defaultValue="true" />
+    <SwitchPreference
+        android:key="pref_location"
+        android:title="@string/pref_location"
+        android:defaultValue="true" />
+    <SwitchPreference
+        android:key="pref_about"
+        android:title="@string/pref_about"
+        android:defaultValue="true" />
+</Preferences>
