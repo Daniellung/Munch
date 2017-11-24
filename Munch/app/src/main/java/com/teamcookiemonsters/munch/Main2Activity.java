@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -42,6 +43,9 @@ import static junit.framework.Assert.assertNotNull;
 public class Main2Activity extends AppCompatActivity
         implements SearchView.OnQueryTextListener, SearchView.OnCloseListener {
 
+    //EditText mEdit;
+    //String text;
+
     private SearchManager searchManager;
     private android.widget.SearchView searchView;
     private MyExpandableListAdapter listAdapter;
@@ -61,12 +65,28 @@ public class Main2Activity extends AppCompatActivity
     public YelpFusionApi mYelpFusionApi;
     public YelpFusionApiFactory apiFactory;
     public Map<String, String> mParams;
+
+    public static int listDisplay = 0;
     //SearchResponse response;
+
+    String[] lists = new String[20];
+
+    //public int i;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
+       Intent intent = getIntent();
+
+       SearchItem search = (SearchItem)intent.getSerializableExtra("Search");
+
+       String text = search.getSearch();
+
+       // SearchItem newSearch = new SearchItem();
+       // newSearch.setSearch("indian");
+       // String meow = newSearch.getSearch();
 
         apiFactory = new YelpFusionApiFactory();
         try {
@@ -81,7 +101,12 @@ public class Main2Activity extends AppCompatActivity
 
         //mParams.put("San Francisco", "indian food");
 
-        mParams.put("term", "indian food");
+
+        String woof = "Indian Food";
+
+        //setSearch();
+
+        mParams.put("term", text);
         mParams.put("latitude", "40.581140");
         mParams.put("longitude", "-111.914184");
 
@@ -89,7 +114,7 @@ public class Main2Activity extends AppCompatActivity
 
         try {
             // thread to sleep for 1000 milliseconds
-            Thread.sleep(3000);
+            Thread.sleep(8000);
         } catch (Exception e) {
             Toast.makeText(this,"Didnt Work",Toast.LENGTH_LONG).show();
         }
@@ -146,6 +171,11 @@ public class Main2Activity extends AppCompatActivity
         expandAll();
     }
 
+    /*public void setSearch(){
+        mEdit = (EditText)findViewById(R.id.searchText);
+        text = mEdit.getText().toString();
+    }*/
+
 
 
 
@@ -163,14 +193,22 @@ public class Main2Activity extends AppCompatActivity
     private void loadData() {
         ArrayList<ChildRow> childRows = new ArrayList<ChildRow>();
         ParentRow parentRow = null;
-
+        /*
         childRows.add(new ChildRow(R.mipmap.ic_launcher_round
                 , "Text1"));
         childRows.add(new ChildRow(R.mipmap.ic_launcher_round
-                , "Text2"));
+                , testOne));
+        */
+        for(int i = 0; i < 14; i++){
+            childRows.add(new ChildRow(R.mipmap.ic_launcher_round
+                    , lists[i]));
+        }
+
         parentRow = new ParentRow("First Group", childRows);
+
         parentList.add(parentRow);
 
+        /*
         childRows = new ArrayList<ChildRow>();
         childRows.add(new ChildRow(R.mipmap.ic_launcher_round
                 , "Text3"));
@@ -178,6 +216,7 @@ public class Main2Activity extends AppCompatActivity
         , testOne));
         parentRow = new ParentRow("Second Group", childRows);
         parentList.add(parentRow);
+        */
     }
 
     private void expandAll() {
@@ -244,8 +283,10 @@ public class Main2Activity extends AppCompatActivity
                 e.printStackTrace();
             }
             if(response != null){
-                Log.v("Businesses", response.body().getBusinesses().get(0).getName());
-                testOne = response.body().getBusinesses().get(0).getName();
+                for(int i = 0; i < 14; i++) {
+                    Log.v("Businesses", response.body().getBusinesses().get(i).getName());
+                    lists[i] = response.body().getBusinesses().get(i).getName();
+                }
             }
             return null;
         }
