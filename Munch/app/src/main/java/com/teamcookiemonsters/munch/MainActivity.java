@@ -1,8 +1,10 @@
 package com.teamcookiemonsters.munch;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.ButtonBarLayout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,8 +42,19 @@ public class MainActivity extends AppCompatActivity {
 
         // initialize button
         Button goSearch = (Button) findViewById(R.id.button1);
+        Button goNavi = (Button) findViewById(R.id.button3);
         // set up listener
 
+        goNavi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent naviIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/" +
+                        "Jack+Baskin+School+Of+Engineering/@37.000353,-122.065333,17z/" +
+                        "data=!3m2!4b1!5s0x808e417502b520a5:0x8580897e3de81364!4m5!3m4!1s0x808e4174e0eafc51:" +
+                        "0x13397e072d0f2a67!8m2!3d37.000353!4d-122.0631443?hl=en"));
+                startActivity(naviIntent);
+            }
+        });
 
         goSearch.setOnClickListener(new View.OnClickListener() {
             @Override

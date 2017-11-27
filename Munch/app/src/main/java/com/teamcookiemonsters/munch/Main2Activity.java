@@ -4,6 +4,7 @@ package com.teamcookiemonsters.munch;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -170,6 +171,16 @@ public class Main2Activity extends AppCompatActivity
         displayList();
         //expands the list of contents
         expandAll();
+
+        /*
+        myList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent naviIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/"));
+                startActivity(naviIntent);
+            }
+        });
+        */
     }
 
     /*public void setSearch(){
