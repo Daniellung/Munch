@@ -236,7 +236,7 @@ public class Main2Activity extends AppCompatActivity
     }
 
     //gets random integer for the index i in lists[i] which is the list used to display search results
-    private int getRandomInt(void) {
+    private int getRandomInt() {
         int min = 1;
         int max = 14;
         Random rand = new Random();

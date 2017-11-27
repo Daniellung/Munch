@@ -9,10 +9,22 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import android.widget.TextView;
 import java.io.OutputStreamWriter;
+
+import android.app.Dialog;
+import android.util.Log;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "MainActivity";
+    private static final int ERROR_DOALOG_REQUEST = 9001;
+
+    TextView textView;
 
     EditText mEdit;
     String text;
@@ -20,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(isServicesOK()){
+            init();
+        }
 
 
         // initialize button
@@ -40,8 +56,43 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //Button button2 = (Button) findViewById(R.id.button2);
+        //Intent map = new Intent(this,Main3Activity.class);
+        //startActivity(map);
     }
 
+    private void init(){
+        Button button2 = (Button) findViewById(R.id.button2);
+        button2.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
 
+    public boolean isServicesOK(){
+        Log.d(TAG, "isServicesOK: checking google services version");
+
+        int available = GoogleApiAvailability.getInstance()
+                .isGooglePlayServicesAvailable(MainActivity.this);
+
+        if(available == ConnectionResult.SUCCESS){
+            Log.d(TAG, "isServicesOK: Google Play Services is working");
+            return true;
+        }
+        else if(GoogleApiAvailability.getInstance().isUserResolvableError(available)){
+            Log.d(TAG, "isServicesOK: an error occured but we can fix it");
+            Dialog dialog = GoogleApiAvailability.getInstance()
+                    .getErrorDialog(MainActivity.this, available, ERROR_DOALOG_REQUEST);
+            dialog.show();
+        }
+        else{
+            Toast.makeText(this, "You can't make map requests", Toast.LENGTH_SHORT).show();
+        }
+        return false;
+    }
 }
 
