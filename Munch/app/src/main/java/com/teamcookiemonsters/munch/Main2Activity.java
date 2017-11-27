@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.lang.*;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
@@ -232,6 +233,15 @@ public class Main2Activity extends AppCompatActivity
         myList = (ExpandableListView) findViewById(R.id.expandableListView_search);
         listAdapter = new MyExpandableListAdapter(Main2Activity.this, parentList);
         myList.setAdapter(listAdapter);
+    }
+
+    //gets random integer for the index i in lists[i] which is the list used to display search results
+    private int getRandomInt(void) {
+        int min = 1;
+        int max = 14;
+        Random rand = new Random();
+        int randInt = rand.nextInt((max-min)+1)+min;
+        return randInt;
     }
 
     @Override

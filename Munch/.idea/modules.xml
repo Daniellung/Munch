@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Munch.iml" filepath="$PROJECT_DIR$/Munch.iml" />
+      <module fileurl="file://E:\CS115\Repo\application\Munch\Munch.iml" filepath="E:\CS115\Repo\application\Munch\Munch.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://E:\CS115\Repo\application\Munch\app\app.iml" filepath="E:\CS115\Repo\application\Munch\app\app.iml" />
     </modules>
   </component>
 </project>
