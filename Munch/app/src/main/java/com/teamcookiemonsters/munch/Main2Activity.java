@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.SearchView;
@@ -74,6 +75,8 @@ public class Main2Activity extends AppCompatActivity
     String[] lists = new String[20];
 
     //public int i;
+    public int randomIndex;
+    public String restaurantName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -181,6 +184,23 @@ public class Main2Activity extends AppCompatActivity
             }
         });
         */
+        // connect random button
+        Button randomButton = (Button) findViewById(R.id.random_button);
+        randomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // get random index
+                 randomIndex = getRandomInt();
+                 // get restaurant name
+                 restaurantName = lists[randomIndex];
+
+                 // launch full view activity
+                Intent restInfoIntent = new Intent((Main2Activity.this), RestInfoActivity.class);
+                // pass restaurant name to the activity
+                restInfoIntent.putExtra("name", restaurantName);
+                startActivity(restInfoIntent);
+            }
+        });
     }
 
     /*public void setSearch(){

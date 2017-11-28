@@ -10,8 +10,46 @@
     <ExpandableListView
         android:id="@+id/expandableListView_search"
         android:layout_width="368dp"
-        android:layout_height="wrap_content"
+        android:layout_height="449dp"
         android:layout_alignParentLeft="true"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="0dp"></ExpandableListView>
+
+    <LinearLayout
+        android:id="@+id/button_view"
+        android:layout_width="match_parent"
+        android:layout_height="504dp"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Button"
+            tools:layout_editor_absoluteX="264dp"
+            tools:layout_editor_absoluteY="447dp" />
+
+        <Button
+            android:id="@+id/random_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Pick for Me!"
+            tools:layout_editor_absoluteX="137dp"
+            tools:layout_editor_absoluteY="447dp" />
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Button"
+            tools:layout_editor_absoluteX="34dp"
+            tools:layout_editor_absoluteY="447dp" />
+
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>
