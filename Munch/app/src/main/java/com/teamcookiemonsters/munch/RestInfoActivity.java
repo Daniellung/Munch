@@ -20,6 +20,7 @@ public class RestInfoActivity extends AppCompatActivity {
         testText.setText(name);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(name);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
