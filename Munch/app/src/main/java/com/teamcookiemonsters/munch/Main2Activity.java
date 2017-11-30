@@ -43,8 +43,7 @@ import retrofit2.Response;
 
 import static junit.framework.Assert.assertNotNull;
 
-public class Main2Activity extends AppCompatActivity
-        implements SearchView.OnQueryTextListener, SearchView.OnCloseListener {
+public class Main2Activity extends AppCompatActivity implements SearchView.OnQueryTextListener, SearchView.OnCloseListener {
 
     //EditText mEdit;
     //String text;
@@ -72,26 +71,32 @@ public class Main2Activity extends AppCompatActivity
     public static int listDisplay = 0;
     //SearchResponse response;
 
-    String[] lists = new String[20];
+    String[] rNames = new String[20];
+    String[] rAddresses = new String[20];
+    String[] rPhones = new String[20];
+    //String[] rURLs = new String[20];
+    String[] rImageURLs = new String[20];
 
     //public int i;
     public int randomIndex;
     public String restaurantName;
+    public String restaurantPhone;
+    public String restaurantURL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-       Intent intent = getIntent();
+        Intent intent = getIntent();
 
-       SearchItem search = (SearchItem)intent.getSerializableExtra("Search");
+        SearchItem search = (SearchItem)intent.getSerializableExtra("Search");
 
-       String text = search.getSearch();
+        String text = search.getSearch();
 
-       // SearchItem newSearch = new SearchItem();
-       // newSearch.setSearch("indian");
-       // String meow = newSearch.getSearch();
+        // SearchItem newSearch = new SearchItem();
+        // newSearch.setSearch("indian");
+        // String meow = newSearch.getSearch();
 
         apiFactory = new YelpFusionApiFactory();
         try {
@@ -142,12 +147,14 @@ public class Main2Activity extends AppCompatActivity
         }
 
         */
-       /* try {
-          businessSearchTest();
-          //response = call.execute();
-        } catch (IOException ex){
-            Toast.makeText(this,"Didnt Work",Toast.LENGTH_LONG).show();
+        /*
+        try {
+           businessSearchTest();
+           //response = call.execute();
+        } catch (IOException ex) {
+           Toast.makeText(this,"Didnt Work",Toast.LENGTH_LONG).show();
         }*/
+
 
         //response.body().getBusinesses().get(0);
         //testOne = response.getBusinesses().get(0).getName();
@@ -189,15 +196,23 @@ public class Main2Activity extends AppCompatActivity
         randomButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // get random index
-                 randomIndex = getRandomInt();
-                 // get restaurant name
-                 restaurantName = lists[randomIndex];
 
-                 // launch full view activity
+                // get random index
+                randomIndex = getRandomInt();
+
+                // get restaurant info
+                restaurantName = rNames[randomIndex];
+                restaurantPhone = rPhones[randomIndex];
+                //restaurantURL = rURLs[randomIndex];
+
+                // "target" restaurant info activity
                 Intent restInfoIntent = new Intent((Main2Activity.this), RestInfoActivity.class);
-                // pass restaurant name to the activity
+                // pass restaurant info to the activity
                 restInfoIntent.putExtra("name", restaurantName);
+                restInfoIntent.putExtra("phone", restaurantPhone);
+                //restInfoIntent.putExtra("url", restaurantURL);
+
+                // launch activity
                 startActivity(restInfoIntent);
             }
         });
@@ -232,8 +247,7 @@ public class Main2Activity extends AppCompatActivity
                 , testOne));
         */
         for(int i = 0; i < 14; i++){
-            childRows.add(new ChildRow(R.mipmap.ic_launcher_round
-                    , lists[i]));
+            childRows.add(new ChildRow(R.mipmap.ic_launcher_round, rNames[i]));
         }
 
         parentRow = new ParentRow("First Group", childRows);
@@ -266,7 +280,7 @@ public class Main2Activity extends AppCompatActivity
         myList.setAdapter(listAdapter);
     }
 
-    //gets random integer for the index i in lists[i] which is the list used to display search results
+    //gets random integer for the index i in rNames[i] which is the list used to display search results
     private int getRandomInt() {
         int min = 1;
         int max = 14;
@@ -326,7 +340,10 @@ public class Main2Activity extends AppCompatActivity
             if(response != null){
                 for(int i = 0; i < 14; i++) {
                     Log.v("Businesses", response.body().getBusinesses().get(i).getName());
-                    lists[i] = response.body().getBusinesses().get(i).getName();
+                    rNames[i] = response.body().getBusinesses().get(i).getName();
+                    rPhones[i] = response.body().getBusinesses().get(i).getDisplayPhone();
+                    //rURLs[i] = response.body().getBusinesses().get(i).getUrl();
+                    rImageURLs[i] = response.body().getBusinesses().get(i).getImageUrl();
                 }
             }
             return null;

@@ -15,9 +15,17 @@ public class RestInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rest_info);
 
+        // receive passed in restaurant info
         String name = getIntent().getStringExtra("name");
-        TextView testText = (TextView) findViewById(R.id.testText);
-        testText.setText(name);
+        String phone = getIntent().getStringExtra("phone");
+        //String url = getIntent().getStringExtra("url");
+
+        // display texts
+        TextView phoneText = (TextView) findViewById(R.id.phone_text);
+        //TextView urlText = (TextView) findViewById(R.id.url_text);
+
+        phoneText.setText(phone);
+        //urlText.setText(url);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(name);
