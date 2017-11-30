@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         // initialize button
         Button goSearch = (Button) findViewById(R.id.button1);
         Button goNavi = (Button) findViewById(R.id.button3);
+        Button goPref = (Button) findViewById(R.id.button4);
         // set up listener
 
         goNavi.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +70,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        goPref.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View k) {
+                Intent pref = new Intent(MainActivity.this, Main4Activity.class);
+                startActivity(pref);
+            }
+        });
+
+
 
         //Button button2 = (Button) findViewById(R.id.button2);
         //Intent map = new Intent(this,Main3Activity.class);
