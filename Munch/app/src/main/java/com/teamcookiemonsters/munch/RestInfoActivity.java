@@ -26,6 +26,7 @@ public class RestInfoActivity extends AppCompatActivity {
         String city = getIntent().getStringExtra("city");
         String state = getIntent().getStringExtra("state");
         String country = getIntent().getStringExtra("country");
+        String zipcode = getIntent().getStringExtra("zipcode");
         //String url = getIntent().getStringExtra("url");
 
         // display texts
@@ -36,6 +37,7 @@ public class RestInfoActivity extends AppCompatActivity {
         TextView cityText = (TextView) findViewById(R.id.city_text);
         TextView stateText = (TextView) findViewById(R.id.state_text);
         TextView countryText = (TextView) findViewById(R.id.country_text);
+        TextView zipcodeText = (TextView) findViewById(R.id.zipcode_text);
         //TextView urlText = (TextView) findViewById(R.id.url_text);
 
         phoneText.setText(phone);
@@ -45,6 +47,7 @@ public class RestInfoActivity extends AppCompatActivity {
         cityText.setText(city);
         stateText.setText(state);
         countryText.setText(country);
+        zipcodeText.setText(zipcode);
         //urlText.setText(url);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

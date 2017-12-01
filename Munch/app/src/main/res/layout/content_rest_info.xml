@@ -26,7 +26,7 @@
             android:id="@+id/address1_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/phone_text"
+            android:layout_margin="@dimen/text_margin"
             android:layout_below="@+id/phone_text"
             />
 
@@ -34,7 +34,7 @@
             android:id="@+id/address2_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/address1_text"
+            android:layout_margin="@dimen/text_margin"
             android:layout_below="@+id/address1_text"
             />
 
@@ -42,7 +42,7 @@
             android:id="@+id/address3_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/address2_text"
+            android:layout_margin="@dimen/text_margin"
             android:layout_below="@+id/address2_text"
             />
 
@@ -50,7 +50,7 @@
             android:id="@+id/city_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/address3_text"
+            android:layout_margin="@dimen/text_margin"
             android:layout_below="@+id/address3_text"
             />
 
@@ -58,7 +58,7 @@
             android:id="@+id/state_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/city_text"
+            android:layout_margin="@dimen/text_margin"
             android:layout_below="@+id/city_text"
             />
 
@@ -66,8 +66,16 @@
             android:id="@+id/country_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/state_text"
+            android:layout_margin="@dimen/text_margin"
             android:layout_below="@+id/state_text"
+            />
+
+        <TextView
+            android:id="@+id/zipcode_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:layout_below="@+id/country_text"
             />
 
     </LinearLayout>

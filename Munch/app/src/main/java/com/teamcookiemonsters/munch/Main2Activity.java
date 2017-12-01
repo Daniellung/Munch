@@ -85,6 +85,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
     String[] rCity = new String[20];
     String[] rState = new String[20];
     String[] rCountry = new String[20];
+    String[] rZipCode = new String[20];
 
     //public int i;
     public int randomIndex;
@@ -98,6 +99,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
     public String restaurantCity;
     public String restaurantState;
     public String restaurantCountry;
+    public String restaurantZipCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -234,6 +236,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
                 restaurantCity = rCity[randomIndex];
                 restaurantState = rState[randomIndex];
                 restaurantCountry = rCountry[randomIndex];
+                restaurantZipCode = rZipCode[randomIndex];
 
                 // "target" restaurant info activity
                 Intent restInfoIntent = new Intent((Main2Activity.this), RestInfoActivity.class);
@@ -246,6 +249,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
                 restInfoIntent.putExtra("city", restaurantCity);
                 restInfoIntent.putExtra("state", restaurantState);
                 restInfoIntent.putExtra("country", restaurantCountry);
+                restInfoIntent.putExtra("zipcode", restaurantZipCode);
                 //restInfoIntent.putExtra("url", restaurantURL);
 
                 // launch activity
@@ -387,6 +391,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
                     rCity[i] = response.body().getBusinesses().get(i).getLocation().getCity();
                     rState[i] = response.body().getBusinesses().get(i).getLocation().getState();
                     rCountry[i] = response.body().getBusinesses().get(i).getLocation().getCountry();
+                    rZipCode[i] = response.body().getBusinesses().get(i).getLocation().getZipCode();
                 }
             }
             return null;
