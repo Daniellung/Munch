@@ -75,16 +75,29 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
     //SearchResponse response;
 
     String[] rNames = new String[20];
-    String[] rAddresses = new String[20];
+    //Object[] rAddresses = new Object[20];
     String[] rPhones = new String[20];
     //String[] rURLs = new String[20];
     String[] rImageURLs = new String[20];
+    String[] rAddress1 = new String[20];
+    String[] rAddress2 = new String[20];
+    String[] rAddress3 = new String[20];
+    String[] rCity = new String[20];
+    String[] rState = new String[20];
+    String[] rCountry = new String[20];
 
     //public int i;
     public int randomIndex;
     public String restaurantName;
+    //public Object restaurantAddress;
     public String restaurantPhone;
     public String restaurantURL;
+    public String restaurantAddress1;
+    public String restaurantAddress2;
+    public String restaurantAddress3;
+    public String restaurantCity;
+    public String restaurantState;
+    public String restaurantCountry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -202,7 +215,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         });
         */
         // connect random button
-        Button randomButton = (Button) findViewById(R.id.random_button);
+        final Button randomButton = (Button) findViewById(R.id.random_button);
         randomButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -212,14 +225,27 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
 
                 // get restaurant info
                 restaurantName = rNames[randomIndex];
+                //restaurantAddress = rAddresses[randomIndex];
                 restaurantPhone = rPhones[randomIndex];
                 //restaurantURL = rURLs[randomIndex];
+                restaurantAddress1 = rAddress1[randomIndex];
+                restaurantAddress2 = rAddress2[randomIndex];
+                restaurantAddress3 = rAddress3[randomIndex];
+                restaurantCity = rCity[randomIndex];
+                restaurantState = rState[randomIndex];
+                restaurantCountry = rCountry[randomIndex];
 
                 // "target" restaurant info activity
                 Intent restInfoIntent = new Intent((Main2Activity.this), RestInfoActivity.class);
                 // pass restaurant info to the activity
                 restInfoIntent.putExtra("name", restaurantName);
                 restInfoIntent.putExtra("phone", restaurantPhone);
+                restInfoIntent.putExtra("address1", restaurantAddress1);
+                restInfoIntent.putExtra("address2", restaurantAddress2);
+                restInfoIntent.putExtra("address3", restaurantAddress3);
+                restInfoIntent.putExtra("city", restaurantCity);
+                restInfoIntent.putExtra("state", restaurantState);
+                restInfoIntent.putExtra("country", restaurantCountry);
                 //restInfoIntent.putExtra("url", restaurantURL);
 
                 // launch activity
@@ -351,9 +377,16 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
                 for(int i = 0; i < 14; i++) {
                     Log.v("Businesses", response.body().getBusinesses().get(i).getName());
                     rNames[i] = response.body().getBusinesses().get(i).getName();
+                    //rAddresses[i] = response.body().getBusinesses().get(i).getLocation();
                     rPhones[i] = response.body().getBusinesses().get(i).getDisplayPhone();
                     //rURLs[i] = response.body().getBusinesses().get(i).getUrl();
                     rImageURLs[i] = response.body().getBusinesses().get(i).getImageUrl();
+                    rAddress1[i] = response.body().getBusinesses().get(i).getLocation().getAddress1();
+                    rAddress2[i] = response.body().getBusinesses().get(i).getLocation().getAddress2();
+                    rAddress3[i] = response.body().getBusinesses().get(i).getLocation().getAddress3();
+                    rCity[i] = response.body().getBusinesses().get(i).getLocation().getCity();
+                    rState[i] = response.body().getBusinesses().get(i).getLocation().getState();
+                    rCountry[i] = response.body().getBusinesses().get(i).getLocation().getCountry();
                 }
             }
             return null;
