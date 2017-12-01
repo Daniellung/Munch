@@ -154,8 +154,8 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
 
         /*
         mParams.put("term", text);
-        mParams.put("latitude", "37.7749");
-        mParams.put("longitude", "122.4194");
+        mParams.put("latitude", "40.581140");
+        mParams.put("longitude", "-111.914184");
         new GetData().execute();
         */
 
