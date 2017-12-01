@@ -132,7 +132,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
 
         String woof = "Indian Food";
 
-        //setSearch();
+        //s
         LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         double longitude = location.getLongitude();
@@ -141,6 +141,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         String lon = Double.toString(longitude);
         String lat = Double.toString(latitude);
 
+        //setSearch();
         mParams.put("term", text);
         mParams.put("latitude", lat);
         mParams.put("longitude", lon);
