@@ -1,11 +1,14 @@
 package com.teamcookiemonsters.munch;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -27,6 +30,8 @@ public class RestInfoActivity extends AppCompatActivity {
         String state = getIntent().getStringExtra("state");
         String country = getIntent().getStringExtra("country");
         String zipcode = getIntent().getStringExtra("zipcode");
+        //final Double latitude = getIntent().getDoubleExtra("latitude", 0.0);
+        //final Double longitude = getIntent().getDoubleExtra("longitude", 0.0);
         //String url = getIntent().getStringExtra("url");
 
         // display texts
@@ -62,5 +67,16 @@ public class RestInfoActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        /*
+        Button goMap = (Button) findViewById(R.id.button);
+        goMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String googlemaps = "http://www.google.com/maps/place/"+ latitude + "," + longitude;
+                Intent naviIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(googlemaps));
+                startActivity(naviIntent);
+            }
+        });
+        */
     }
 }

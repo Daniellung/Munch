@@ -128,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
+
     private void getLocationPermission() {
         Log.d(TAG, "getLocationPermission: getting location permissions");
         String[] permisssions = {android.Manifest.permission.ACCESS_FINE_LOCATION,

@@ -86,6 +86,8 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
     String[] rState = new String[20];
     String[] rCountry = new String[20];
     String[] rZipCode = new String[20];
+    //Double[] rLatitude = new Double[20];
+    //Double[] rLongitude = new Double[20];
 
     //public int i;
     public int randomIndex;
@@ -100,6 +102,8 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
     public String restaurantState;
     public String restaurantCountry;
     public String restaurantZipCode;
+    //public Double restaurantLatitude;
+    //public Double restaurantLongitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,7 +136,8 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
 
         String woof = "Indian Food";
 
-        //s
+
+        //Location Manager to find longitude and latitude of current location and put into search
         LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         double longitude = location.getLongitude();
@@ -145,8 +150,14 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         mParams.put("term", text);
         mParams.put("latitude", lat);
         mParams.put("longitude", lon);
-
         new GetData().execute();
+
+        /*
+        mParams.put("term", text);
+        mParams.put("latitude", "37.7749");
+        mParams.put("longitude", "122.4194");
+        new GetData().execute();
+        */
 
         try {
             // thread to sleep for 1000 milliseconds
@@ -238,6 +249,9 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
                 restaurantState = rState[randomIndex];
                 restaurantCountry = rCountry[randomIndex];
                 restaurantZipCode = rZipCode[randomIndex];
+                //restaurantLatitude = rLatitude[randomIndex];
+                //restaurantLongitude = rLongitude[randomIndex];
+
 
                 // "target" restaurant info activity
                 Intent restInfoIntent = new Intent((Main2Activity.this), RestInfoActivity.class);
@@ -251,6 +265,8 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
                 restInfoIntent.putExtra("state", restaurantState);
                 restInfoIntent.putExtra("country", restaurantCountry);
                 restInfoIntent.putExtra("zipcode", restaurantZipCode);
+                //restInfoIntent.putExtra("latitude", restaurantLatitude);
+                //restInfoIntent.putExtra("longitude", restaurantLongitude);
                 //restInfoIntent.putExtra("url", restaurantURL);
 
                 // launch activity
@@ -393,6 +409,8 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
                     rState[i] = response.body().getBusinesses().get(i).getLocation().getState();
                     rCountry[i] = response.body().getBusinesses().get(i).getLocation().getCountry();
                     rZipCode[i] = response.body().getBusinesses().get(i).getLocation().getZipCode();
+                    //rLatitude[i] = response.body().getBusinesses().get(i).getCoordinates().getLatitude();
+                    //rLongitude[i] = response.body().getBusinesses().get(i).getCoordinates().getLongitude();
                 }
             }
             return null;
