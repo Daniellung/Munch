@@ -41,6 +41,9 @@ import retrofit2.Response;
 //import okhttp3.Request;
 //import okhttp3.Response;
 
+import android.location.Location;
+import android.location.LocationManager;
+
 import static junit.framework.Assert.assertNotNull;
 
 public class Main2Activity extends AppCompatActivity implements SearchView.OnQueryTextListener, SearchView.OnCloseListener {
@@ -115,10 +118,17 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         String woof = "Indian Food";
 
         //setSearch();
+        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        double longitude = location.getLongitude();
+        double latitude = location.getLatitude();
+
+        String lon = Double.toString(longitude);
+        String lat = Double.toString(latitude);
 
         mParams.put("term", text);
-        mParams.put("latitude", "40.581140");
-        mParams.put("longitude", "-111.914184");
+        mParams.put("latitude", lat);
+        mParams.put("longitude", lon);
 
         new GetData().execute();
 
