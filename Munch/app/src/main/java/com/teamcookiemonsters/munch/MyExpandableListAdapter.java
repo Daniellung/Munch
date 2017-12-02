@@ -19,6 +19,7 @@ import java.util.ArrayList;
  * Created by Justin Tse on 10/24/2017.
  */
 
+//adapter for expandable list
 public class MyExpandableListAdapter extends BaseExpandableListAdapter {
 
     private Context context;
@@ -33,41 +34,49 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         this.originalList.addAll(originalList);
     }
 
+    //number of parent row
     @Override
     public int getGroupCount() {
         return parentRowList.size();
     }
 
+    //number of child rows
     @Override
     public int getChildrenCount(int groupPosition) {
         return parentRowList.get(groupPosition).getChildList().size();
     }
 
+    //gets the parent row containing the child row
     @Override
     public Object getGroup(int groupPosition) {
         return parentRowList.get(groupPosition);
     }
 
+    //gets child row
     @Override
     public Object getChild(int groupPosition, int childPosition) {
         return parentRowList.get(groupPosition).getChildList().get(childPosition);
     }
 
+    //gets location of child row's id
     @Override
     public long getGroupId(int groupPosition) {
         return groupPosition;
     }
 
+    //gets the child row id
     @Override
     public long getChildId(int groupPosition, int childPosition) {
         return childPosition;
     }
 
+    //checks ids
     @Override
     public boolean hasStableIds() {
         return true;
     }
 
+    //gets group view
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup viewGroup) {
         ParentRow parentRow = (ParentRow) getGroup(groupPosition);
@@ -83,6 +92,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         return convertView;
     }
 
+    //gets child view
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup viewGroup) {
         ChildRow childRow = (ChildRow) getChild(groupPosition, childPosition);
@@ -110,11 +120,13 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         return convertView;
     }
 
+    //checks if child is selectable
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
     }
 
+    //fiters data
     public void filterData(String query){
         query = query.toLowerCase();
         parentRowList.clear();
