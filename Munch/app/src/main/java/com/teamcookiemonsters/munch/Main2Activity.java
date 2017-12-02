@@ -73,6 +73,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
     public static int listDisplay = 0;
     //SearchResponse response;
 
+    //data arrays for items to be listed and displayed in search results
     String[] rNames = new String[20];
     //Object[] rAddresses = new Object[20];
     String[] rPhones = new String[20];
@@ -88,6 +89,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
     //Double[] rLatitudes = new Double[20];
     //Double[] rLongitudes = new Double[20];
 
+    //data place holders for a restaurant to be looked at
     //public int i;
     public int randomIndex;
     public String restaurantName;
@@ -212,8 +214,9 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         */
 
         searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-
+        //top layer list
         parentList = new ArrayList<ParentRow>();
+        //display the top layer list
         showTheseParentList = new ArrayList<ParentRow>();
 
         //app will crash if display list not called here
@@ -297,6 +300,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
     }
     */
 
+    //load list data
     private void loadData() {
         ArrayList<ChildRow> childRows = new ArrayList<ChildRow>();
         ParentRow parentRow = null;
@@ -326,6 +330,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         */
     }
 
+    //expand top layer list
     private void expandAll() {
         int count = listAdapter.getGroupCount();
         for (int i = 0; i < count; i++) {
@@ -333,6 +338,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         }
     }
 
+    //show list
     private void displayList() {
         loadData();
 
@@ -350,6 +356,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         return randInt;
     }
 
+    //creates options menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //inflate the menu; this adds items to the aciton bar if it is present.
@@ -365,6 +372,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         return true;
     }
 
+    //initialize for results of search
     @Override
     public boolean onClose() {
         listAdapter.filterData("");
@@ -372,6 +380,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         return false;
     }
 
+    //does search
     @Override
     public boolean onQueryTextSubmit(String query) {
         listAdapter.filterData(query);
@@ -379,6 +388,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         return false;
     }
 
+    //filters results
     @Override
     public boolean onQueryTextChange(String newText) {
         listAdapter.filterData(newText);
@@ -386,6 +396,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         return false;
     }
 
+    //gets yelp data
     class GetData extends AsyncTask<String, String, String> {
 
         @Override
@@ -397,6 +408,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
             } catch (IOException e){
                 e.printStackTrace();
             }
+            //loads data into lists
             if(response != null){
                 for(int i = 0; i < 14; i++) {
                     Log.v("Businesses", response.body().getBusinesses().get(i).getName());
