@@ -88,6 +88,9 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
     String[] rZipCodes = new String[20];
     //Double[] rLatitudes = new Double[20];
     //Double[] rLongitudes = new Double[20];
+    //Boolean[] rIsOpen = new Boolean[20];
+    String[] rPrice = new String[20];
+    Double[] rRating = new Double[20];
 
     //data place holders for a restaurant to be looked at
     //public int i;
@@ -105,6 +108,9 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
     public String restaurantZipCode;
     //public Double restaurantLatitude;
     //public Double restaurantLongitude;
+    //public Boolean restaurantIsOpen;
+    public String restaurantPrice;
+    public Double restaurantRating;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -256,6 +262,9 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
                 restaurantZipCode = rZipCodes[randomIndex];
                 //restaurantLatitude = rLatitudes[randomIndex];
                 //restaurantLongitude = rLongitudes[randomIndex];
+                //restaurantIsOpen = rIsOpen[randomIndex];
+                restaurantPrice = rPrice[randomIndex];
+                restaurantRating = rRating[randomIndex];
 
                 // "target" restaurant info activity
                 Intent restInfoIntent = new Intent((Main2Activity.this), RestInfoActivity.class);
@@ -273,6 +282,9 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
                 //restInfoIntent.putExtra("latitude", restaurantLatitude);
                 //restInfoIntent.putExtra("longitude", restaurantLongitude);
                 //restInfoIntent.putExtra("url", restaurantURL);
+                //restInfoIntent.putExtra("isopen", restaurantIsOpen);
+                restInfoIntent.putExtra("price", restaurantPrice);
+                restInfoIntent.putExtra("rating", restaurantRating);
 
                 // launch activity
                 startActivity(restInfoIntent);
@@ -426,6 +438,9 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
                     rZipCodes[i] = response.body().getBusinesses().get(i).getLocation().getZipCode();
                     //rLatitudes[i] = response.body().getBusinesses().get(i).getCoordinates().getLatitude();
                     //rLongitudes[i] = response.body().getBusinesses().get(i).getCoordinates().getLongitude();
+                    //rIsOpen[i] = response.body().getBusinesses().get(i).getHours().get(i).getIsOpenNow();
+                    rPrice[i] = response.body().getBusinesses().get(i).getPrice();
+                    rRating[i] = response.body().getBusinesses().get(i).getRating();
                 }
             }
             return null;

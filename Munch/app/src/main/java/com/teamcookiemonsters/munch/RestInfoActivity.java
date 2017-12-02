@@ -33,6 +33,12 @@ public class RestInfoActivity extends AppCompatActivity {
         //final Double latitude = getIntent().getDoubleExtra("latitude", 0.0);
         //final Double longitude = getIntent().getDoubleExtra("longitude", 0.0);
         //String url = getIntent().getStringExtra("url");
+        //String isopen = getIntent().getStringExtra("isopen");
+        String price = getIntent().getStringExtra("price");
+        Double rating = getIntent().getDoubleExtra("rating", 0.0);
+        //convert passed in double to string
+        String ratingString = rating.toString();
+
 
         // set up textviews
         TextView phoneText = (TextView) findViewById(R.id.phone_text);
@@ -42,6 +48,9 @@ public class RestInfoActivity extends AppCompatActivity {
         //TextView countryText = (TextView) findViewById(R.id.country_text);
         //TextView zipcodeText = (TextView) findViewById(R.id.zipcode_text);
         //TextView urlText = (TextView) findViewById(R.id.url_text);
+        //TextView isopenText = (TextView) findViewById(R.id.isopen_text);
+        TextView priceText = (TextView) findViewById(R.id.price_text);
+        TextView ratingText = (TextView) findViewById(R.id.rating_text);
 
         // concat addresses
         String address = address1 + "\n" + city + ", " + state + " " + zipcode;
@@ -63,6 +72,9 @@ public class RestInfoActivity extends AppCompatActivity {
         //countryText.setText(country);
         //zipcodeText.setText(zipcode);
         //urlText.setText(url);
+        //isopenText.setText(isopen);
+        priceText.setText(price);
+        ratingText.setText(ratingString);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(name);
