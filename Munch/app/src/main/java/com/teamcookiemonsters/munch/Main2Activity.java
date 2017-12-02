@@ -155,8 +155,8 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         // Comment out Below for Android Device ----------------------------------
 
         mParams.put("term", text);
-        mParams.put("latitude", "40.581140");
-        mParams.put("longitude", "-111.914184");
+        mParams.put("latitude", "37.000353");
+        mParams.put("longitude", "-122.06314429999998");
         new GetData().execute();
 
         // -----------------------------------------------------------------------
@@ -336,7 +336,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
     private void displayList() {
         loadData();
 
-        myList = (ExpandableListView) findViewById(R.id.expandableListView_search);
+        myList = (ExpandableListView) findViewById(R.id.results_list);
         listAdapter = new MyExpandableListAdapter(Main2Activity.this, parentList);
         myList.setAdapter(listAdapter);
     }
