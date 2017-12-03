@@ -1,66 +1,101 @@
 package com.teamcookiemonsters.munch;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
-public class Main3Activity extends AppCompatActivity {
+public class Main3Activity extends AppCompatActivity implements View.OnClickListener {
 
-    private static final String TAG = "MainActivity3";
+    private Button buttonRegister;
+    private EditText editTextEmail;
+    private EditText editTextPassword;
+    private TextView textViewSignin;
 
-    private static final int ERROR_DOALOG_REQUEST = 9001;
+    private ProgressDialog progressDialog;
 
-
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(isServicesOK()){
-            init();
-        }
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        progressDialog = new ProgressDialog(this);
+
+        buttonRegister = (Button) findViewById(R.id.buttonRegister);
+
+        editTextEmail = (EditText) findViewById(R.id.editTextEmail);
+        editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+
+        textViewSignin = (TextView) findViewById((R.id.textViewSignin));
+
+        buttonRegister.setOnClickListener(this);
+        textViewSignin.setOnClickListener(this);
+
     }
 
-    private void init(){
-        Button button2 = (Button) findViewById(R.id.button2);
-        button2.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Intent intent = new Intent(Main3Activity.this, MapActivity.class);
-                startActivity(intent);
-            }
-        });
+    private void registerUser(){
+        String email = editTextEmail.getText().toString().trim();
+        String password = editTextPassword.getText().toString().trim();
+
+        if(TextUtils.isEmpty(email)){
+            //empty email
+            Toast.makeText(this, "Please enter your email", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(TextUtils.isEmpty(password)){
+            //empty password
+            Toast.makeText(this, "Please enter your password", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        progressDialog.setMessage("registering user");
+        progressDialog.show();
+
+        firebaseAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            //register success, logged in auto
+                            Toast.makeText(Main3Activity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+                        } else{
+                            Toast.makeText(Main3Activity.this, "Could not register", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+        //if validations are ok
     }
 
-    public boolean isServicesOK(){
-        Log.d(TAG, "isServicesOK: checking google services version");
+    @Override
+    public void onClick(View v) {
+        if(v == buttonRegister){
+            registerUser();
+        }
 
-        int available = GoogleApiAvailability.getInstance()
-                .isGooglePlayServicesAvailable(Main3Activity.this);
-
-        if(available == ConnectionResult.SUCCESS){
-            Log.d(TAG, "isServicesOK: Google Play Services is working");
-            return true;
+        if(v == textViewSignin){
+            //open login activity
         }
-        else if(GoogleApiAvailability.getInstance().isUserResolvableError(available)){
-            Log.d(TAG, "isServicesOK: an error occured but we can fix it");
-            Dialog dialog = GoogleApiAvailability.getInstance()
-                    .getErrorDialog(Main3Activity.this, available, ERROR_DOALOG_REQUEST);
-            dialog.show();
-        }
-        else{
-            Toast.makeText(this, "You can't make map requests", Toast.LENGTH_SHORT).show();
-        }
-        return false;
     }
-
 }
