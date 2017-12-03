@@ -114,6 +114,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
     public Double restaurantRating;
 
     public String sOpenNow;
+    public String sDollars;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -163,14 +164,18 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
 
         // Comment out Below for Android Device ----------------------------------
         sOpenNow = "false";
+        sDollars = "1,2,3,4";
         SharedPreferences sharepref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
         if(sharepref.getString("eOpenNow", null) != null) sOpenNow = sharepref.getString("eOpenNow", null);
+        if(sharepref.getString("eDollars", null) != null) sDollars = sharepref.getString("eDollars", null);
+
         //System.out.println(sOpenNow);
 
         mParams.put("term", text);
         mParams.put("latitude", "37.000353");
         mParams.put("longitude", "-122.06314429999998");
         mParams.put("open_now", sOpenNow);
+        mParams.put("price", sDollars);
         //mParams.put("open_now", "true");
         //mParams.put("price", "1,2,,");
         new GetData().execute();

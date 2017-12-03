@@ -64,28 +64,28 @@ public class Main4Activity extends AppCompatActivity {
                 case R.id.checkBox2:
                     if(Dollar1.isChecked()) bDollar1 = true;
                     else bDollar1 = false;
-                    System.out.println(bDollar1);
+                    //System.out.println(bDollar1);
                     break;
 
                 // does case when checkbox3(Dollar2) is clicked
                 case R.id.checkBox3:
                     if(Dollar2.isChecked()) bDollar2 = true;
                     else bDollar2 = false;
-                    System.out.println(bDollar2);
+                    //System.out.println(bDollar2);
                     break;
 
                 // does case when checkbox4(Dollar3) is clicked
                 case R.id.checkBox4:
                     if(Dollar3.isChecked()) bDollar3 = true;
                     else bDollar3 = false;
-                    System.out.println(bDollar3);
+                    //System.out.println(bDollar3);
                     break;
 
                 // does case when checkbox5(Dollar4) is clicked
                 case R.id.checkBox5:
                     if(Dollar4.isChecked()) bDollar4 = true;
                     else bDollar4 = false;
-                    System.out.println(bDollar4);
+                    //System.out.println(bDollar4);
                     break;
                 default:
                     break;
@@ -98,28 +98,37 @@ public class Main4Activity extends AppCompatActivity {
     public void onBackPressed(){
         //System.out.println(bOpenNow + " " + bDollar1 + " " + bDollar2 + " " + bDollar3+ " " + bDollar4);
         String sOpenNow = Boolean.toString(bOpenNow);
+        String sDollars = dollarsignconvert();
+        if(sDollars.equals("bad input")){
+            Toast.makeText(Main4Activity.this, "Warning!! If no price level is chosen the app will default to all price levels.", Toast.LENGTH_SHORT).show();
+            sDollars = "1,2,3,4";
+        }
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
         SharedPreferences.Editor editor = pref.edit();
         editor.putString("eOpenNow", sOpenNow);
+        editor.putString("eDollars", sDollars);
         editor.commit();
+
         finish();
     }
 
     public String dollarsignconvert (){
         if(bDollar1 && !(bDollar2) && !(bDollar3) && !(bDollar4)) return "1";
-        if(!(bDollar1) && bDollar2 && !(bDollar3) && !(bDollar4)) return "2";
-        if(!(bDollar1) && !(bDollar2) && bDollar3 && !(bDollar4)) return "3";
-        if(!(bDollar1) && !(bDollar2) && !(bDollar3) && bDollar4) return "4";
-        if(bDollar1 && bDollar2 && !(bDollar3) && !(bDollar4)) return "1,2";
-        if(bDollar1 && !(bDollar2) && bDollar3 && !(bDollar4)) return "1,3";
-        if(bDollar1 && !(bDollar2) && !(bDollar3) && bDollar4) return "1,4";
-        if(!(bDollar1) && bDollar2 && bDollar3 && !(bDollar4)) return "2,3";
-        if(!(bDollar1) && bDollar2 && !(bDollar3) && bDollar4) return "2,4";
-        if(!(bDollar1) && !(bDollar2) && bDollar3 && bDollar4) return "3,4";
-        if(bDollar1 && bDollar2 && bDollar3 && !(bDollar4)) return "1,2,3";
-        if(bDollar1 && bDollar2 && !(bDollar3) && bDollar4) return "1,2,4";
-        if(bDollar1 && !(bDollar2) && bDollar3 && bDollar4) return "1,3,4";
-        return "x";
+        else if(!(bDollar1) && bDollar2 && !(bDollar3) && !(bDollar4)) return "2";
+        else if(!(bDollar1) && !(bDollar2) && bDollar3 && !(bDollar4)) return "3";
+        else if(!(bDollar1) && !(bDollar2) && !(bDollar3) && bDollar4) return "4";
+        else if(bDollar1 && bDollar2 && !(bDollar3) && !(bDollar4)) return "1,2";
+        else if(bDollar1 && !(bDollar2) && bDollar3 && !(bDollar4)) return "1,3";
+        else if(bDollar1 && !(bDollar2) && !(bDollar3) && bDollar4) return "1,4";
+        else if(!(bDollar1) && bDollar2 && bDollar3 && !(bDollar4)) return "2,3";
+        else if(!(bDollar1) && bDollar2 && !(bDollar3) && bDollar4) return "2,4";
+        else if(!(bDollar1) && !(bDollar2) && bDollar3 && bDollar4) return "3,4";
+        else if(bDollar1 && bDollar2 && bDollar3 && !(bDollar4)) return "1,2,3";
+        else if(bDollar1 && bDollar2 && !(bDollar3) && bDollar4) return "1,2,4";
+        else if(bDollar1 && !(bDollar2) && bDollar3 && bDollar4) return "1,3,4";
+        else if(!(bDollar1) && bDollar2 && bDollar3 && bDollar4) return "2,3,4";
+        else if(bDollar1 && bDollar2 && bDollar3 && bDollar4) return "1,2,3,4";
+        else return "bad input";
     }
 
 }
