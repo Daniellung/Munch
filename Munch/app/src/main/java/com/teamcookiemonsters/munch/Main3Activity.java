@@ -84,7 +84,7 @@ public class Main3Activity extends AppCompatActivity implements View.OnClickList
                             Toast.makeText(Main3Activity.this, "Could not register", Toast.LENGTH_SHORT).show();
                         }
                     }
-                });
+                });  
         //if validations are ok
     }
 
