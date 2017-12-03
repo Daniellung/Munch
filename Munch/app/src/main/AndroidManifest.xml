@@ -26,21 +26,23 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity
-            android:name=".MainActivity"
+        <activity android:name=".Main3Activity"
             android:label="SearchViewExpandableListView">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".MainActivity"
+            android:label="SearchViewExpandableListView">
             \\search bar
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
         <activity android:name=".Main2Activity" />
-        <activity android:name=".Main3Activity" />
         <activity android:name=".Main4Activity" />
         <activity android:name=".MapActivity" />
         <activity

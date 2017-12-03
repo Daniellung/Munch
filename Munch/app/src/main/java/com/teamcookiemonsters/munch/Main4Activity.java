@@ -104,7 +104,7 @@ public class Main4Activity extends AppCompatActivity {
         editor.commit();
         finish();
     }
-/*
+
     public String dollarsignconvert (){
         if(bDollar1 && !(bDollar2) && !(bDollar3) && !(bDollar4)) return "1";
         if(!(bDollar1) && bDollar2 && !(bDollar3) && !(bDollar4)) return "2";
@@ -116,6 +116,10 @@ public class Main4Activity extends AppCompatActivity {
         if(!(bDollar1) && bDollar2 && bDollar3 && !(bDollar4)) return "2,3";
         if(!(bDollar1) && bDollar2 && !(bDollar3) && bDollar4) return "2,4";
         if(!(bDollar1) && !(bDollar2) && bDollar3 && bDollar4) return "3,4";
+        if(bDollar1 && bDollar2 && bDollar3 && !(bDollar4)) return "1,2,3";
+        if(bDollar1 && bDollar2 && !(bDollar3) && bDollar4) return "1,2,4";
+        if(bDollar1 && !(bDollar2) && bDollar3 && bDollar4) return "1,3,4";
+        return "x";
     }
-*/
+
 }
