@@ -3,6 +3,7 @@ package com.teamcookiemonsters.munch;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v4.view.MenuItemCompat;
@@ -112,6 +113,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
     public String restaurantPrice;
     public Double restaurantRating;
 
+    public String sOpenNow;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,7 +141,6 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
 
         String woof = "Indian Food";
 
-
         // Comment out below for Android Emulator ================================
         /*
         //Location Manager to find longitude and latitude of current location and put into search
@@ -161,10 +162,15 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
 
 
         // Comment out Below for Android Device ----------------------------------
+        sOpenNow = "false";
+        SharedPreferences sharepref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        if(sharepref.getString("eOpenNow", null) != null) sOpenNow = sharepref.getString("eOpenNow", null);
+        //System.out.println(sOpenNow);
 
         mParams.put("term", text);
         mParams.put("latitude", "37.000353");
         mParams.put("longitude", "-122.06314429999998");
+        mParams.put("open_now", sOpenNow);
         //mParams.put("open_now", "true");
         //mParams.put("price", "1,2,,");
         new GetData().execute();
@@ -172,7 +178,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         // -----------------------------------------------------------------------
 
 
-        mParams.put("open_now", "true");
+
 
         // API search delay timer
         try {
