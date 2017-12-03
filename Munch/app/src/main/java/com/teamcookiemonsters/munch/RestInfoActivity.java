@@ -30,8 +30,8 @@ public class RestInfoActivity extends AppCompatActivity {
         String state = getIntent().getStringExtra("state");
         String country = getIntent().getStringExtra("country");
         String zipcode = getIntent().getStringExtra("zipcode");
-        //final Double latitude = getIntent().getDoubleExtra("latitude", 0.0);
-        //final Double longitude = getIntent().getDoubleExtra("longitude", 0.0);
+        final String latitude = getIntent().getStringExtra("latitude");
+        final String longitude = getIntent().getStringExtra("longitude");
         //String url = getIntent().getStringExtra("url");
         //String isopen = getIntent().getStringExtra("isopen");
         String price = getIntent().getStringExtra("price");
@@ -89,8 +89,8 @@ public class RestInfoActivity extends AppCompatActivity {
             }
         });
 
-        /*
-        Button goMap = (Button) findViewById(R.id.button);
+
+        Button goMap = (Button) findViewById(R.id.mapbutton);
         goMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,6 +99,6 @@ public class RestInfoActivity extends AppCompatActivity {
                 startActivity(naviIntent);
             }
         });
-        */
+
     }
 }

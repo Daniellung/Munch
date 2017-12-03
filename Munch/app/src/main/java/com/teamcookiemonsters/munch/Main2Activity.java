@@ -87,8 +87,8 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
     String[] rStates = new String[20];
     String[] rCountries = new String[20];
     String[] rZipCodes = new String[20];
-    //Double[] rLatitudes = new Double[20];
-    //Double[] rLongitudes = new Double[20];
+    Double[] rLatitudes = new Double[20];
+    Double[] rLongitudes = new Double[20];
     //Boolean[] rIsOpen = new Boolean[20];
     String[] rPrice = new String[20];
     Double[] rRating = new Double[20];
@@ -107,8 +107,8 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
     public String restaurantState;
     public String restaurantCountry;
     public String restaurantZipCode;
-    //public Double restaurantLatitude;
-    //public Double restaurantLongitude;
+    public Double restaurantLatitude;
+    public Double restaurantLongitude;
     //public Boolean restaurantIsOpen;
     public String restaurantPrice;
     public Double restaurantRating;
@@ -271,8 +271,8 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
                 restaurantState = rStates[randomIndex];
                 restaurantCountry = rCountries[randomIndex];
                 restaurantZipCode = rZipCodes[randomIndex];
-                //restaurantLatitude = rLatitudes[randomIndex];
-                //restaurantLongitude = rLongitudes[randomIndex];
+                restaurantLatitude = rLatitudes[randomIndex];
+                restaurantLongitude = rLongitudes[randomIndex];
                 //restaurantIsOpen = rIsOpen[randomIndex];
                 restaurantPrice = rPrice[randomIndex];
                 restaurantRating = rRating[randomIndex];
@@ -290,8 +290,8 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
                 restInfoIntent.putExtra("state", restaurantState);
                 restInfoIntent.putExtra("country", restaurantCountry);
                 restInfoIntent.putExtra("zipcode", restaurantZipCode);
-                //restInfoIntent.putExtra("latitude", restaurantLatitude);
-                //restInfoIntent.putExtra("longitude", restaurantLongitude);
+                restInfoIntent.putExtra("latitude", Double.toString(restaurantLatitude));
+                restInfoIntent.putExtra("longitude", Double.toString(restaurantLongitude));
                 //restInfoIntent.putExtra("url", restaurantURL);
                 //restInfoIntent.putExtra("isopen", restaurantIsOpen);
                 restInfoIntent.putExtra("price", restaurantPrice);
@@ -447,8 +447,8 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
                     rStates[i] = response.body().getBusinesses().get(i).getLocation().getState();
                     rCountries[i] = response.body().getBusinesses().get(i).getLocation().getCountry();
                     rZipCodes[i] = response.body().getBusinesses().get(i).getLocation().getZipCode();
-                    //rLatitudes[i] = response.body().getBusinesses().get(i).getCoordinates().getLatitude();
-                    //rLongitudes[i] = response.body().getBusinesses().get(i).getCoordinates().getLongitude();
+                    rLatitudes[i] = response.body().getBusinesses().get(i).getCoordinates().getLatitude();
+                    rLongitudes[i] = response.body().getBusinesses().get(i).getCoordinates().getLongitude();
                     //rIsOpen[i] = response.body().getBusinesses().get(i).getHours().get(i).getIsOpenNow();
                     rPrice[i] = response.body().getBusinesses().get(i).getPrice();
                     rRating[i] = response.body().getBusinesses().get(i).getRating();
