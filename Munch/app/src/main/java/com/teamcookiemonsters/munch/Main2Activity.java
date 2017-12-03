@@ -1,4 +1,3 @@
-//I'm not Dianna K
 package com.teamcookiemonsters.munch;
 
 import android.app.SearchManager;
@@ -74,21 +73,26 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
     public static int listDisplay = 0;
     //SearchResponse response;
 
+    //data arrays for items to be listed and displayed in search results
     String[] rNames = new String[20];
     //Object[] rAddresses = new Object[20];
     String[] rPhones = new String[20];
     //String[] rURLs = new String[20];
     String[] rImageURLs = new String[20];
-    String[] rAddress1 = new String[20];
-    String[] rAddress2 = new String[20];
-    String[] rAddress3 = new String[20];
-    String[] rCity = new String[20];
-    String[] rState = new String[20];
-    String[] rCountry = new String[20];
-    String[] rZipCode = new String[20];
-    //Double[] rLatitude = new Double[20];
-    //Double[] rLongitude = new Double[20];
+    String[] rAddresses1 = new String[20];
+    String[] rAddresses2 = new String[20];
+    String[] rAddresses3 = new String[20];
+    String[] rCities = new String[20];
+    String[] rStates = new String[20];
+    String[] rCountries = new String[20];
+    String[] rZipCodes = new String[20];
+    //Double[] rLatitudes = new Double[20];
+    //Double[] rLongitudes = new Double[20];
+    //Boolean[] rIsOpen = new Boolean[20];
+    String[] rPrice = new String[20];
+    Double[] rRating = new Double[20];
 
+    //data place holders for a restaurant to be looked at
     //public int i;
     public int randomIndex;
     public String restaurantName;
@@ -104,6 +108,9 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
     public String restaurantZipCode;
     //public Double restaurantLatitude;
     //public Double restaurantLongitude;
+    //public Boolean restaurantIsOpen;
+    public String restaurantPrice;
+    public Double restaurantRating;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,9 +118,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         setContentView(R.layout.activity_main2);
 
         Intent intent = getIntent();
-
         SearchItem search = (SearchItem)intent.getSerializableExtra("Search");
-
         String text = search.getSearch();
 
         // SearchItem newSearch = new SearchItem();
@@ -130,13 +135,13 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         }
 
         mParams = new HashMap<>();
-
         //mParams.put("San Francisco", "indian food");
-
 
         String woof = "Indian Food";
 
 
+        // Comment out below for Android Emulator ================================
+        /*
         //Location Manager to find longitude and latitude of current location and put into search
         LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -151,14 +156,20 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         mParams.put("latitude", lat);
         mParams.put("longitude", lon);
         new GetData().execute();
-
-        /*
-        mParams.put("term", text);
-        mParams.put("latitude", "40.581140");
-        mParams.put("longitude", "-111.914184");
-        new GetData().execute();
         */
+        // =======================================================================
 
+
+        // Comment out Below for Android Device ----------------------------------
+
+        mParams.put("term", text);
+        mParams.put("latitude", "37.000353");
+        mParams.put("longitude", "-122.06314429999998");
+        new GetData().execute();
+
+        // -----------------------------------------------------------------------
+
+        // API search delay timer
         try {
             // thread to sleep for 1000 milliseconds
             Thread.sleep(8000);
@@ -166,11 +177,10 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
             Toast.makeText(this,"Didnt Work",Toast.LENGTH_LONG).show();
         }
 
-        /*Call<SearchResponse> call = yelpFusionApi.getBusinessSearch(params);
+        /*
+        Call<SearchResponse> call = yelpFusionApi.getBusinessSearch(params);
 
         Response<SearchResponse> response = null;
-
-
 
         if (call != null){*/
         /*Call<Business> call = yelpFusionApi.getBusiness("japacurry-truck-san-francisco");
@@ -182,8 +192,8 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         } catch (IOException e){
             Toast.makeText(this,"Didnt Work",Toast.LENGTH_LONG).show();
         }
-
         */
+
         /*
         try {
            businessSearchTest();
@@ -192,13 +202,11 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
            Toast.makeText(this,"Didnt Work",Toast.LENGTH_LONG).show();
         }*/
 
-
         //response.body().getBusinesses().get(0);
         //testOne = response.getBusinesses().get(0).getName();
 
-
-
-        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        /*
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSuportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -208,10 +216,13 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH)
                         .setAction("Action", null).show();
             }
-        });*/
-        searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        });
+        */
 
+        searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        //top layer list
         parentList = new ArrayList<ParentRow>();
+        //display the top layer list
         showTheseParentList = new ArrayList<ParentRow>();
 
         //app will crash if display list not called here
@@ -228,12 +239,12 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
             }
         });
         */
-        // connect random button
+
+        // "Pick for Me" button
         final Button randomButton = (Button) findViewById(R.id.random_button);
         randomButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 // get random index
                 randomIndex = getRandomInt();
 
@@ -242,19 +253,22 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
                 //restaurantAddress = rAddresses[randomIndex];
                 restaurantPhone = rPhones[randomIndex];
                 //restaurantURL = rURLs[randomIndex];
-                restaurantAddress1 = rAddress1[randomIndex];
-                restaurantAddress2 = rAddress2[randomIndex];
-                restaurantAddress3 = rAddress3[randomIndex];
-                restaurantCity = rCity[randomIndex];
-                restaurantState = rState[randomIndex];
-                restaurantCountry = rCountry[randomIndex];
-                restaurantZipCode = rZipCode[randomIndex];
-                //restaurantLatitude = rLatitude[randomIndex];
-                //restaurantLongitude = rLongitude[randomIndex];
-
+                restaurantAddress1 = rAddresses1[randomIndex];
+                restaurantAddress2 = rAddresses2[randomIndex];
+                restaurantAddress3 = rAddresses3[randomIndex];
+                restaurantCity = rCities[randomIndex];
+                restaurantState = rStates[randomIndex];
+                restaurantCountry = rCountries[randomIndex];
+                restaurantZipCode = rZipCodes[randomIndex];
+                //restaurantLatitude = rLatitudes[randomIndex];
+                //restaurantLongitude = rLongitudes[randomIndex];
+                //restaurantIsOpen = rIsOpen[randomIndex];
+                restaurantPrice = rPrice[randomIndex];
+                restaurantRating = rRating[randomIndex];
 
                 // "target" restaurant info activity
                 Intent restInfoIntent = new Intent((Main2Activity.this), RestInfoActivity.class);
+
                 // pass restaurant info to the activity
                 restInfoIntent.putExtra("name", restaurantName);
                 restInfoIntent.putExtra("phone", restaurantPhone);
@@ -268,6 +282,9 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
                 //restInfoIntent.putExtra("latitude", restaurantLatitude);
                 //restInfoIntent.putExtra("longitude", restaurantLongitude);
                 //restInfoIntent.putExtra("url", restaurantURL);
+                //restInfoIntent.putExtra("isopen", restaurantIsOpen);
+                restInfoIntent.putExtra("price", restaurantPrice);
+                restInfoIntent.putExtra("rating", restaurantRating);
 
                 // launch activity
                 startActivity(restInfoIntent);
@@ -275,15 +292,15 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         });
     }
 
-    /*public void setSearch(){
+    /*
+    public void setSearch(){
         mEdit = (EditText)findViewById(R.id.searchText);
         text = mEdit.getText().toString();
-    }*/
+    }
+    */
 
-
-
-
-   /* public void businessSearchTest() throws IOException {
+    /*
+    public void businessSearchTest() throws IOException {
         Map<String, String> parms = new HashMap<>();
         parms.put("term", "indian food");
         parms.put("latitude", "40.581140");
@@ -292,23 +309,26 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         Response<SearchResponse> response = call.execute();
         testOne = response.body().getBusinesses().get(0).getName();
         assertNotNull(response);
-    }*/
+    }
+    */
 
+    //load list data
     private void loadData() {
         ArrayList<ChildRow> childRows = new ArrayList<ChildRow>();
         ParentRow parentRow = null;
+
         /*
         childRows.add(new ChildRow(R.mipmap.ic_launcher_round
                 , "Text1"));
         childRows.add(new ChildRow(R.mipmap.ic_launcher_round
                 , testOne));
         */
+
         for(int i = 0; i < 14; i++){
             childRows.add(new ChildRow(R.mipmap.ic_launcher_round, rNames[i]));
         }
 
         parentRow = new ParentRow("First Group", childRows);
-
         parentList.add(parentRow);
 
         /*
@@ -322,6 +342,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         */
     }
 
+    //expand top layer list
     private void expandAll() {
         int count = listAdapter.getGroupCount();
         for (int i = 0; i < count; i++) {
@@ -329,15 +350,16 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         }
     }
 
+    //show list
     private void displayList() {
         loadData();
 
-        myList = (ExpandableListView) findViewById(R.id.expandableListView_search);
+        myList = (ExpandableListView) findViewById(R.id.results_list);
         listAdapter = new MyExpandableListAdapter(Main2Activity.this, parentList);
         myList.setAdapter(listAdapter);
     }
 
-    //gets random integer for the index i in rNames[i] which is the list used to display search results
+    // gets random integer for the index i in rNames[i] which is the list used to display search results
     private int getRandomInt() {
         int min = 1;
         int max = 14;
@@ -346,6 +368,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         return randInt;
     }
 
+    //creates options menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //inflate the menu; this adds items to the aciton bar if it is present.
@@ -361,6 +384,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         return true;
     }
 
+    //initialize for results of search
     @Override
     public boolean onClose() {
         listAdapter.filterData("");
@@ -368,6 +392,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         return false;
     }
 
+    //does search
     @Override
     public boolean onQueryTextSubmit(String query) {
         listAdapter.filterData(query);
@@ -375,6 +400,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         return false;
     }
 
+    //filters results
     @Override
     public boolean onQueryTextChange(String newText) {
         listAdapter.filterData(newText);
@@ -382,7 +408,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         return false;
     }
 
-
+    //gets yelp data
     class GetData extends AsyncTask<String, String, String> {
 
         @Override
@@ -394,6 +420,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
             } catch (IOException e){
                 e.printStackTrace();
             }
+            //loads data into lists
             if(response != null){
                 for(int i = 0; i < 14; i++) {
                     Log.v("Businesses", response.body().getBusinesses().get(i).getName());
@@ -402,15 +429,18 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
                     rPhones[i] = response.body().getBusinesses().get(i).getDisplayPhone();
                     //rURLs[i] = response.body().getBusinesses().get(i).getUrl();
                     rImageURLs[i] = response.body().getBusinesses().get(i).getImageUrl();
-                    rAddress1[i] = response.body().getBusinesses().get(i).getLocation().getAddress1();
-                    rAddress2[i] = response.body().getBusinesses().get(i).getLocation().getAddress2();
-                    rAddress3[i] = response.body().getBusinesses().get(i).getLocation().getAddress3();
-                    rCity[i] = response.body().getBusinesses().get(i).getLocation().getCity();
-                    rState[i] = response.body().getBusinesses().get(i).getLocation().getState();
-                    rCountry[i] = response.body().getBusinesses().get(i).getLocation().getCountry();
-                    rZipCode[i] = response.body().getBusinesses().get(i).getLocation().getZipCode();
-                    //rLatitude[i] = response.body().getBusinesses().get(i).getCoordinates().getLatitude();
-                    //rLongitude[i] = response.body().getBusinesses().get(i).getCoordinates().getLongitude();
+                    rAddresses1[i] = response.body().getBusinesses().get(i).getLocation().getAddress1();
+                    rAddresses2[i] = response.body().getBusinesses().get(i).getLocation().getAddress2();
+                    rAddresses3[i] = response.body().getBusinesses().get(i).getLocation().getAddress3();
+                    rCities[i] = response.body().getBusinesses().get(i).getLocation().getCity();
+                    rStates[i] = response.body().getBusinesses().get(i).getLocation().getState();
+                    rCountries[i] = response.body().getBusinesses().get(i).getLocation().getCountry();
+                    rZipCodes[i] = response.body().getBusinesses().get(i).getLocation().getZipCode();
+                    //rLatitudes[i] = response.body().getBusinesses().get(i).getCoordinates().getLatitude();
+                    //rLongitudes[i] = response.body().getBusinesses().get(i).getCoordinates().getLongitude();
+                    //rIsOpen[i] = response.body().getBusinesses().get(i).getHours().get(i).getIsOpenNow();
+                    rPrice[i] = response.body().getBusinesses().get(i).getPrice();
+                    rRating[i] = response.body().getBusinesses().get(i).getRating();
                 }
             }
             return null;

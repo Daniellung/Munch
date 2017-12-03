@@ -8,78 +8,61 @@
     tools:context="com.teamcookiemonsters.munch.RestInfoActivity"
     tools:showIn="@layout/activity_rest_info">
 
+    <!-- linear layout to list restaurant info -->
     <LinearLayout
+        android:id="@+id/linear_layout1"
+        android:layout_height="match_parent"
         android:layout_width="fill_parent"
         android:orientation="vertical"
-        android:id="@+id/linearLayout1"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center_vertical|center_horizontal">
+        >
 
+        <!-- address -->
+        <TextView
+            android:id="@+id/address_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_margin="@dimen/text_margin"
+            />
+
+        <!-- phone number -->
         <TextView
             android:id="@+id/phone_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
+            android:layout_gravity="right"
             />
 
+        <!-- is open? -->
+        <!--
         <TextView
-            android:id="@+id/address1_text"
+            android:id="@+id/isopen_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:layout_below="@+id/phone_text"
+            android:layout_gravity="right"
             />
+            -->
 
         <TextView
-            android:id="@+id/address2_text"
+            android:id="@+id/price_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:layout_below="@+id/address1_text"
+            android:layout_gravity="right"
             />
+        -->
 
         <TextView
-            android:id="@+id/address3_text"
+            android:id="@+id/rating_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:layout_below="@+id/address2_text"
+            android:layout_gravity="right"
             />
-
-        <TextView
-            android:id="@+id/city_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:layout_below="@+id/address3_text"
-            />
-
-        <TextView
-            android:id="@+id/state_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:layout_below="@+id/city_text"
-            />
-
-        <TextView
-            android:id="@+id/country_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:layout_below="@+id/state_text"
-            />
-
-        <TextView
-            android:id="@+id/zipcode_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:layout_below="@+id/country_text"
-            />
+        -->
 
     </LinearLayout>
-
-
 
 </android.support.v4.widget.NestedScrollView>

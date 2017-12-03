@@ -33,27 +33,48 @@ public class RestInfoActivity extends AppCompatActivity {
         //final Double latitude = getIntent().getDoubleExtra("latitude", 0.0);
         //final Double longitude = getIntent().getDoubleExtra("longitude", 0.0);
         //String url = getIntent().getStringExtra("url");
+        //String isopen = getIntent().getStringExtra("isopen");
+        String price = getIntent().getStringExtra("price");
+        Double rating = getIntent().getDoubleExtra("rating", 0.0);
+        //convert passed in double to string
+        String ratingString = rating.toString();
+
+
+        // set up textviews
+        TextView phoneText = (TextView) findViewById(R.id.phone_text);
+        TextView addressText = (TextView) findViewById(R.id.address_text);
+        //TextView cityText = (TextView) findViewById(R.id.city_text);
+        //TextView stateText = (TextView) findViewById(R.id.state_text);
+        //TextView countryText = (TextView) findViewById(R.id.country_text);
+        //TextView zipcodeText = (TextView) findViewById(R.id.zipcode_text);
+        //TextView urlText = (TextView) findViewById(R.id.url_text);
+        //TextView isopenText = (TextView) findViewById(R.id.isopen_text);
+        TextView priceText = (TextView) findViewById(R.id.price_text);
+        TextView ratingText = (TextView) findViewById(R.id.rating_text);
+
+        // concat addresses
+        String address = address1 + "\n" + city + ", " + state + " " + zipcode;
+        /*
+        if (address2 == null || address2 == "" && address3 == null || address3 == "") {
+            // keep address as is
+        } else if (address3 == null || address3 == "") {
+            address = address1 + "\n" + address2;
+        } else if (address2 == null || address2 == "") {
+            address = address1 + "\n" + address3;
+        }
+        */
 
         // display texts
-        TextView phoneText = (TextView) findViewById(R.id.phone_text);
-        TextView address1Text = (TextView) findViewById(R.id.address1_text);
-        TextView address2Text = (TextView) findViewById(R.id.address2_text);
-        TextView address3Text = (TextView) findViewById(R.id.address3_text);
-        TextView cityText = (TextView) findViewById(R.id.city_text);
-        TextView stateText = (TextView) findViewById(R.id.state_text);
-        TextView countryText = (TextView) findViewById(R.id.country_text);
-        TextView zipcodeText = (TextView) findViewById(R.id.zipcode_text);
-        //TextView urlText = (TextView) findViewById(R.id.url_text);
-
         phoneText.setText(phone);
-        address1Text.setText(address1);
-        address2Text.setText(address2);
-        address3Text.setText(address3);
-        cityText.setText(city);
-        stateText.setText(state);
-        countryText.setText(country);
-        zipcodeText.setText(zipcode);
+        addressText.setText(address);
+        //cityText.setText(city);
+        //stateText.setText(state);
+        //countryText.setText(country);
+        //zipcodeText.setText(zipcode);
         //urlText.setText(url);
+        //isopenText.setText(isopen);
+        priceText.setText(price);
+        ratingText.setText(ratingString);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(name);
@@ -67,6 +88,7 @@ public class RestInfoActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
         /*
         Button goMap = (Button) findViewById(R.id.button);
         goMap.setOnClickListener(new View.OnClickListener() {
