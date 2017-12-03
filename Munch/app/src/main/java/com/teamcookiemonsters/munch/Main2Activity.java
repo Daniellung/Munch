@@ -165,9 +165,14 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         mParams.put("term", text);
         mParams.put("latitude", "37.000353");
         mParams.put("longitude", "-122.06314429999998");
+        //mParams.put("open_now", "true");
+        //mParams.put("price", "1,2,,");
         new GetData().execute();
 
         // -----------------------------------------------------------------------
+
+
+        mParams.put("open_now", "true");
 
         // API search delay timer
         try {

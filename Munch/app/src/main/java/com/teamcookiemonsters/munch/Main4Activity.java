@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 
 public class Main4Activity extends AppCompatActivity {
-    boolean[] checked = new boolean[5];
     CheckBox OpenNow, Dollar1, Dollar2, Dollar3, Dollar4;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +19,7 @@ public class Main4Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main4);
         OpenNow = (CheckBox) findViewById(R.id.checkBox1);
         //OpenNow.setChecked(false);
+        OpenNow.setOnClickListener(PrefListen);
         OpenNow.setText("Open Now");
         Dollar1 = (CheckBox) findViewById(R.id.checkBox2);
         //Dollar1.setOnClickListener(this);
@@ -37,7 +37,38 @@ public class Main4Activity extends AppCompatActivity {
 
     }
     public boolean isOpenNow(){
-        if(OpenNow.isChecked()) return true;
+        if(OpenNow.isChecked()) {
+            System.out.println("isChecked");
+            return true;
+        }
         else return false;
     }
+    private View.OnClickListener PrefListen = new View.OnClickListener() {
+        public void onClick(View v) {
+            // do something when the button is clicked
+            // Yes we will handle click here but which button clicked??? We don't know
+
+            // So we will make
+            switch (v.getId() /*to get clicked view id**/) {
+                case R.id.checkBox1:
+                    //if(Dollar1.setChecked(true));
+                    // do something when the corky is clicked
+
+                    break;
+                case R.id.checkBox2:
+
+                    // do something when the corky2 is clicked
+
+                    break;
+                case R.id.checkBox3:
+
+                    // do something when the corky3 is clicked
+
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
 }
