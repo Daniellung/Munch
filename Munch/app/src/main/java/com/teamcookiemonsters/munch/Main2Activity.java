@@ -133,9 +133,13 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
 
         mParams = new HashMap<>();
 
-
+        sOpenNow = "false";
+        sDollars = "1,2,3,4";
+        SharedPreferences sharepref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        if(sharepref.getString("eOpenNow", null) != null) sOpenNow = sharepref.getString("eOpenNow", null);
+        if(sharepref.getString("eDollars", null) != null) sDollars = sharepref.getString("eDollars", null);
         // Comment out below for Android Emulator ================================
-        /*
+
         //Location Manager to find longitude and latitude of current location and put into search
         LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -149,17 +153,15 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         mParams.put("term", text);
         mParams.put("latitude", lat);
         mParams.put("longitude", lon);
+        mParams.put("open_now", sOpenNow);
+        mParams.put("price", sDollars);
         new GetData().execute();
-        */
+
         // =======================================================================
 
-
+/*
         // Comment out Below for Android Device ----------------------------------
-        sOpenNow = "false";
-        sDollars = "1,2,3,4";
-        SharedPreferences sharepref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
-        if(sharepref.getString("eOpenNow", null) != null) sOpenNow = sharepref.getString("eOpenNow", null);
-        if(sharepref.getString("eDollars", null) != null) sDollars = sharepref.getString("eDollars", null);
+
 
         //System.out.println(sOpenNow);
 
@@ -168,11 +170,9 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         mParams.put("longitude", "-122.06314429999998");
         mParams.put("open_now", sOpenNow);
         mParams.put("price", sDollars);
-        //mParams.put("open_now", "true");
-        //mParams.put("price", "1,2,,");
         new GetData().execute();
 
-        // -----------------------------------------------------------------------
+        // -----------------------------------------------------------------------*/
 
 
 
