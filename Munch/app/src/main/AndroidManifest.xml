@@ -27,7 +27,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".Main3Activity"
-            android:label="SearchViewExpandableListView">
+            android:label="Munch">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -36,7 +36,7 @@
 
         <activity
             android:name=".MainActivity"
-            android:label="SearchViewExpandableListView">
+            android:label="Munch">
             \\search bar
             <meta-data
                 android:name="android.app.searchable"
