@@ -137,9 +137,11 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         SharedPreferences sharepref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
         if(sharepref.getString("eOpenNow", null) != null) sOpenNow = sharepref.getString("eOpenNow", null);
         if(sharepref.getString("eDollars", null) != null) sDollars = sharepref.getString("eDollars", null);
-        // Comment out below for Android Emulator ================================
 
-        //Location Manager to find longitude and latitude of current location and put into search
+
+        // Comment out below for Android Emulator ================================
+        /*
+        // Location Manager to find longitude and latitude of current location and put into search
         LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         double longitude = location.getLongitude();
@@ -155,12 +157,11 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         mParams.put("open_now", sOpenNow);
         mParams.put("price", sDollars);
         new GetData().execute();
-
+        */
         // =======================================================================
 
-/*
-        // Comment out Below for Android Device ----------------------------------
 
+        // Comment out Below for Android Device ----------------------------------
 
         //System.out.println(sOpenNow);
 
@@ -171,9 +172,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         mParams.put("price", sDollars);
         new GetData().execute();
 
-        // -----------------------------------------------------------------------*/
-
-
+        // -----------------------------------------------------------------------
 
 
         // API search delay timer
