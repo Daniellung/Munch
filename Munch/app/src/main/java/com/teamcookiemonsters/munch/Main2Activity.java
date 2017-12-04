@@ -35,21 +35,18 @@ import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
 import retrofit2.Response;
-//import okhttp3.Call;
-//import okhttp3.Callback;
-//import okhttp3.OkHttpClient;
-//import okhttp3.Request;
-//import okhttp3.Response;
 
 import android.location.Location;
 import android.location.LocationManager;
 
 import static junit.framework.Assert.assertNotNull;
 
+/*
+ * Includes Scrollable List view that is searchable with restaurant information
+ */
+
 public class Main2Activity extends AppCompatActivity implements SearchView.OnQueryTextListener, SearchView.OnCloseListener {
 
-    //EditText mEdit;
-    //String text;
 
     private SearchManager searchManager;
     private android.widget.SearchView searchView;
@@ -72,6 +69,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
     public Map<String, String> mParams;
 
     public static int listDisplay = 0;
+    public static int listEnd = 14;
     //SearchResponse response;
 
     //data arrays for items to be listed and displayed in search results
@@ -94,7 +92,6 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
     Double[] rRating = new Double[20];
 
     //data place holders for a restaurant to be looked at
-    //public int i;
     public int randomIndex;
     public String restaurantName;
     //public Object restaurantAddress;
@@ -124,9 +121,6 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         SearchItem search = (SearchItem)intent.getSerializableExtra("Search");
         String text = search.getSearch();
 
-        // SearchItem newSearch = new SearchItem();
-        // newSearch.setSearch("indian");
-        // String meow = newSearch.getSearch();
 
         apiFactory = new YelpFusionApiFactory();
         try {
@@ -138,9 +132,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         }
 
         mParams = new HashMap<>();
-        //mParams.put("San Francisco", "indian food");
 
-        String woof = "Indian Food";
 
         // Comment out below for Android Emulator ================================
         /*
@@ -193,33 +185,6 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
             Toast.makeText(this,"Didnt Work",Toast.LENGTH_LONG).show();
         }
 
-        /*
-        Call<SearchResponse> call = yelpFusionApi.getBusinessSearch(params);
-
-        Response<SearchResponse> response = null;
-
-        if (call != null){*/
-        /*Call<Business> call = yelpFusionApi.getBusiness("japacurry-truck-san-francisco");
-        Response<Business> response;
-
-        try {
-             response = call.execute();
-            Business business = response.body();
-        } catch (IOException e){
-            Toast.makeText(this,"Didnt Work",Toast.LENGTH_LONG).show();
-        }
-        */
-
-        /*
-        try {
-           businessSearchTest();
-           //response = call.execute();
-        } catch (IOException ex) {
-           Toast.makeText(this,"Didnt Work",Toast.LENGTH_LONG).show();
-        }*/
-
-        //response.body().getBusinesses().get(0);
-        //testOne = response.getBusinesses().get(0).getName();
 
         /*
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -308,26 +273,6 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         });
     }
 
-    /*
-    public void setSearch(){
-        mEdit = (EditText)findViewById(R.id.searchText);
-        text = mEdit.getText().toString();
-    }
-    */
-
-    /*
-    public void businessSearchTest() throws IOException {
-        Map<String, String> parms = new HashMap<>();
-        parms.put("term", "indian food");
-        parms.put("latitude", "40.581140");
-        parms.put("longitude", "-111.914184");
-        Call<SearchResponse> call = mYelpFusionApi.getBusinessSearch(parms);
-        Response<SearchResponse> response = call.execute();
-        testOne = response.body().getBusinesses().get(0).getName();
-        assertNotNull(response);
-    }
-    */
-
     //load list data
     private void loadData() {
         ArrayList<ChildRow> childRows = new ArrayList<ChildRow>();
@@ -340,22 +285,13 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
                 , testOne));
         */
 
-        for(int i = 0; i < 14; i++){
+        for(int i = listDisplay; i < listEnd; i++){
             childRows.add(new ChildRow(R.mipmap.ic_launcher_round, rNames[i]));
         }
 
-        parentRow = new ParentRow("First Group", childRows);
+        parentRow = new ParentRow("Restaurant", childRows);
         parentList.add(parentRow);
 
-        /*
-        childRows = new ArrayList<ChildRow>();
-        childRows.add(new ChildRow(R.mipmap.ic_launcher_round
-                , "Text3"));
-        childRows.add(new ChildRow(R.mipmap.ic_launcher_round
-        , testOne));
-        parentRow = new ParentRow("Second Group", childRows);
-        parentList.add(parentRow);
-        */
     }
 
     //expand top layer list
@@ -377,8 +313,8 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
 
     // gets random integer for the index i in rNames[i] which is the list used to display search results
     private int getRandomInt() {
-        int min = 1;
-        int max = 14;
+        int min = listDisplay + 1;
+        int max = listEnd;
         Random rand = new Random();
         int randInt = rand.nextInt((max-min)+1)+min;
         return randInt;
@@ -438,7 +374,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
             }
             //loads data into lists
             if(response != null){
-                for(int i = 0; i < 14; i++) {
+                for(int i = listDisplay; i < listEnd; i++) {
                     Log.v("Businesses", response.body().getBusinesses().get(i).getName());
                     rNames[i] = response.body().getBusinesses().get(i).getName();
                     //rAddresses[i] = response.body().getBusinesses().get(i).getLocation();
