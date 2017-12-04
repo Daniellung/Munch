@@ -47,7 +47,6 @@ import static junit.framework.Assert.assertNotNull;
 
 public class Main2Activity extends AppCompatActivity implements SearchView.OnQueryTextListener, SearchView.OnCloseListener {
 
-
     private SearchManager searchManager;
     private android.widget.SearchView searchView;
     private MyExpandableListAdapter listAdapter;
@@ -211,16 +210,6 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         //expands the list of contents
         expandAll();
 
-        /*
-        myList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent naviIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/"));
-                startActivity(naviIntent);
-            }
-        });
-        */
-
         // "Pick for Me" button
         final Button randomButton = (Button) findViewById(R.id.random_button);
         randomButton.setOnClickListener(new View.OnClickListener() {
@@ -358,6 +347,14 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         listAdapter.filterData(newText);
         expandAll();
         return false;
+    }
+
+    public void launchRestInfo(View v) {
+        //ExpandableListView
+
+        Intent showInfoIntent = new Intent(Main2Activity.this, RestInfoActivity.class);
+
+        startActivity(showInfoIntent);
     }
 
     //gets yelp data

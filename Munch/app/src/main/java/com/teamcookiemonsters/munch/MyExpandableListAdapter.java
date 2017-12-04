@@ -15,10 +15,6 @@ import org.w3c.dom.Text;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-/**
- * Created by Justin Tse on 10/24/2017.
- */
-
 //adapter for expandable list
 public class MyExpandableListAdapter extends BaseExpandableListAdapter {
 
