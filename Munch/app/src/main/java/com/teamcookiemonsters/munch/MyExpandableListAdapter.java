@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,7 +55,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         return parentRowList.get(groupPosition).getChildList().get(childPosition);
     }
 
-    //gets location of child row's id
+    //gets location of child row's id (the upper layer list)
     @Override
     public long getGroupId(int groupPosition) {
         return groupPosition;
@@ -90,13 +91,20 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
 
     //gets child view
     @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup viewGroup) {
+    public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup viewGroup) {
         ChildRow childRow = (ChildRow) getChild(groupPosition, childPosition);
+
+        //KeyValueDB.setIntId(context, childPosition);
+        ViewHolder mainViewholder = null;
         if (convertView == null){
             LayoutInflater layoutInflater = (LayoutInflater)
                     context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.child_row, null);
+            ViewHolder viewHolder = new ViewHolder();
+            viewHolder.viewButton = (Button) convertView.findViewById(R.id.munch_button);
+            convertView.setTag(viewHolder);
         }
+        mainViewholder = (ViewHolder) convertView.getTag();
         ImageView childIcon = (ImageView) convertView.findViewById(R.id.child_icon);
         childIcon.setImageResource(childRow.getIcon());
 
@@ -104,14 +112,31 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         childText.setText(childRow.getText().trim());
 
         final View finalConvertView = convertView;
-        childText.setOnClickListener(new View.OnClickListener(){
+
+        // The specific item ID is stored in childposition
+        // It is accessible using the KeyValueDB class, which uses shared preferences to access id from anywhere in the application
+        // If you don't know how to access
+        mainViewholder.viewButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 Toast.makeText(finalConvertView.getContext()
-                        , childText.getText()
+                        , "Button PRESSS id is " + childPosition
+                        //, childText.getText()
                         , Toast.LENGTH_SHORT).show();
             }
         });
+
+        /*childText.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Toast.makeText(finalConvertView.getContext()
+                        , "item id is " + childPosition
+                        //, childText.getText()
+                        , Toast.LENGTH_SHORT).show();
+                KeyValueDB.setIntId(context, childPosition);
+
+            }
+        });*/
 
         return convertView;
     }
@@ -147,4 +172,9 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         }
         notifyDataSetChanged();
     }
+
+    public class ViewHolder {
+        Button viewButton;
+    }
+
 }

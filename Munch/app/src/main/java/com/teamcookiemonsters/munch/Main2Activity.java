@@ -14,9 +14,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -66,7 +68,6 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
     public YelpFusionApi mYelpFusionApi;
     public YelpFusionApiFactory apiFactory;
     public Map<String, String> mParams;
-
     public static int listDisplay = 0;
     public static int listEnd = 14;
     //SearchResponse response;
@@ -208,6 +209,23 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         displayList();
         //expands the list of contents
         expandAll();
+
+        //Button viewButton = (Button) findViewById(R.id.munch_button);
+        //ExpandableListView lv = (ExpandableListView) findViewById(R.id.results_list);
+        //lv.setAdapter(new MyExpandableListAdapter(this,R.layout.child_row, ));
+        myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(Main2Activity.this,"List item position at " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        /*viewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+
+            }
+        });*/
 
         // "Pick for Me" button
         final Button randomButton = (Button) findViewById(R.id.random_button);
