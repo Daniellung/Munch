@@ -38,6 +38,7 @@
             android:paddingRight="16dp"
             android:layout_marginRight="5dp"
             android:layout_gravity="center"
+            android:onClick="launchRestInfo"
             android:text="Munch!" />
 
     </LinearLayout>

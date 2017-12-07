@@ -1,6 +1,7 @@
 package com.teamcookiemonsters.munch;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,9 +23,10 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
     private Context context;
     private ArrayList<ParentRow> parentRowList;
     private ArrayList<ParentRow> originalList;
+    //public int childIndex;
 
     public MyExpandableListAdapter(Context context, ArrayList<ParentRow> originalList){
-        this.context =context;
+        this.context = context;
         this.parentRowList = new ArrayList<>();
         this.parentRowList.addAll(originalList);
         this.originalList = new ArrayList<>();
@@ -116,17 +118,23 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         // The specific item ID is stored in childposition
         // It is accessible using the KeyValueDB class, which uses shared preferences to access id from anywhere in the application
         // If you don't know how to access
+
+        /*
         mainViewholder.viewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Toast.makeText(finalConvertView.getContext()
-                        , "Button PRESSS id is " + childPosition
+                        , "Button PRESS id is " + childPosition
                         //, childText.getText()
                         , Toast.LENGTH_SHORT).show();
+
+                KeyValueDB.setIntId(context, childPosition);
             }
         });
+        */
 
-        /*childText.setOnClickListener(new View.OnClickListener(){
+        childText.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 Toast.makeText(finalConvertView.getContext()
@@ -134,9 +142,8 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
                         //, childText.getText()
                         , Toast.LENGTH_SHORT).show();
                 KeyValueDB.setIntId(context, childPosition);
-
             }
-        });*/
+        });
 
         return convertView;
     }

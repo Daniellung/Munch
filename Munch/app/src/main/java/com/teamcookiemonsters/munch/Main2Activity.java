@@ -72,7 +72,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
     public static int listEnd = 14;
     //SearchResponse response;
 
-    //data arrays for items to be listed and displayed in search results
+    // data arrays for items to be listed and displayed in search results
     String[] rNames = new String[20];
     //Object[] rAddresses = new Object[20];
     String[] rPhones = new String[20];
@@ -91,7 +91,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
     String[] rPrice = new String[20];
     Double[] rRating = new Double[20];
 
-    //data place holders for a restaurant to be looked at
+    // data place holders for a restaurant to be looked at
     public int randomIndex;
     public String restaurantName;
     //public Object restaurantAddress;
@@ -112,6 +112,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
 
     public String sOpenNow;
     public String sDollars;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -220,13 +221,6 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
             }
         });
 
-        /*viewButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-
-            }
-        });*/
-
         // "Pick for Me" button
         final Button randomButton = (Button) findViewById(R.id.random_button);
         randomButton.setOnClickListener(new View.OnClickListener() {
@@ -308,7 +302,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         }
     }
 
-    //show list
+    // show list
     private void displayList() {
         loadData();
 
@@ -317,6 +311,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         myList.setAdapter(listAdapter);
     }
 
+
     // gets random integer for the index i in rNames[i] which is the list used to display search results
     private int getRandomInt() {
         int min = listDisplay + 1;
@@ -324,6 +319,12 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         Random rand = new Random();
         int randInt = rand.nextInt((max-min)+1)+min;
         return randInt;
+    }
+
+    private int getItemIndex() {
+        int index = KeyValueDB.getIntId(getApplicationContext());
+        //int index = listAdapter.childIndex;
+        return index;
     }
 
     //creates options menu
@@ -368,8 +369,44 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
 
     public void launchRestInfo(View v) {
         //ExpandableListView
+        int itemIndex = getItemIndex();
+        Toast.makeText(getApplicationContext(), "index is: " + itemIndex, Toast.LENGTH_SHORT).show();
+
+        restaurantName = rNames[itemIndex];
+        //restaurantAddress = rAddresses[itemIndex];
+        restaurantPhone = rPhones[itemIndex];
+        //restaurantURL = rURLs[itemIndex];
+        restaurantAddress1 = rAddresses1[itemIndex];
+        restaurantAddress2 = rAddresses2[itemIndex];
+        restaurantAddress3 = rAddresses3[itemIndex];
+        restaurantCity = rCities[itemIndex];
+        restaurantState = rStates[itemIndex];
+        restaurantCountry = rCountries[itemIndex];
+        restaurantZipCode = rZipCodes[itemIndex];
+        restaurantLatitude = rLatitudes[itemIndex];
+        restaurantLongitude = rLongitudes[itemIndex];
+        //restaurantIsOpen = rIsOpen[itemIndex];
+        restaurantPrice = rPrice[itemIndex];
+        restaurantRating = rRating[itemIndex];
 
         Intent showInfoIntent = new Intent(Main2Activity.this, RestInfoActivity.class);
+
+        // pass restaurant info to the activity
+        showInfoIntent.putExtra("name", restaurantName);
+        showInfoIntent.putExtra("phone", restaurantPhone);
+        showInfoIntent.putExtra("address1", restaurantAddress1);
+        showInfoIntent.putExtra("address2", restaurantAddress2);
+        showInfoIntent.putExtra("address3", restaurantAddress3);
+        showInfoIntent.putExtra("city", restaurantCity);
+        showInfoIntent.putExtra("state", restaurantState);
+        showInfoIntent.putExtra("country", restaurantCountry);
+        showInfoIntent.putExtra("zipcode", restaurantZipCode);
+        showInfoIntent.putExtra("latitude", Double.toString(restaurantLatitude));
+        showInfoIntent.putExtra("longitude", Double.toString(restaurantLongitude));
+        //showInfoIntent.putExtra("url", restaurantURL);
+        //showInfoIntent.putExtra("isopen", restaurantIsOpen);
+        showInfoIntent.putExtra("price", restaurantPrice);
+        showInfoIntent.putExtra("rating", restaurantRating);
 
         startActivity(showInfoIntent);
     }
