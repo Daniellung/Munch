@@ -1,6 +1,7 @@
 package com.teamcookiemonsters.munch;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.text.Layout;
 import android.view.LayoutInflater;
@@ -17,8 +18,42 @@ import org.w3c.dom.Text;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-//adapter for expandable list
+import static com.teamcookiemonsters.munch.Main2Activity.rAddresses1;
+import static com.teamcookiemonsters.munch.Main2Activity.rAddresses2;
+import static com.teamcookiemonsters.munch.Main2Activity.rAddresses3;
+import static com.teamcookiemonsters.munch.Main2Activity.rCities;
+import static com.teamcookiemonsters.munch.Main2Activity.rCountries;
+import static com.teamcookiemonsters.munch.Main2Activity.rLatitudes;
+import static com.teamcookiemonsters.munch.Main2Activity.rLongitudes;
+import static com.teamcookiemonsters.munch.Main2Activity.rNames;
+import static com.teamcookiemonsters.munch.Main2Activity.rPhones;
+import static com.teamcookiemonsters.munch.Main2Activity.rPrice;
+import static com.teamcookiemonsters.munch.Main2Activity.rRating;
+import static com.teamcookiemonsters.munch.Main2Activity.rStates;
+import static com.teamcookiemonsters.munch.Main2Activity.rZipCodes;
+
+// adapter for expandable list
 public class MyExpandableListAdapter extends BaseExpandableListAdapter {
+
+    String restaurantName;
+    //public Object restaurantAddress;
+    String restaurantPhone;
+    String restaurantURL;
+    String restaurantAddress1;
+    String restaurantAddress2;
+    String restaurantAddress3;
+    String restaurantCity;
+    String restaurantState;
+    String restaurantCountry;
+    String restaurantZipCode;
+    Double restaurantLatitude;
+    Double restaurantLongitude;
+    //Boolean restaurantIsOpen;
+    String restaurantPrice;
+    Double restaurantRating;
+
+    String sOpenNow;
+    String sDollars;
 
     private Context context;
     private ArrayList<ParentRow> parentRowList;
@@ -96,7 +131,6 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup viewGroup) {
         ChildRow childRow = (ChildRow) getChild(groupPosition, childPosition);
 
-        //KeyValueDB.setIntId(context, childPosition);
         ViewHolder mainViewholder = null;
         if (convertView == null){
             LayoutInflater layoutInflater = (LayoutInflater)
@@ -118,25 +152,63 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         // The specific item ID is stored in childposition
         // It is accessible using the KeyValueDB class, which uses shared preferences to access id from anywhere in the application
         // If you don't know how to access
-
-        /*
         mainViewholder.viewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                /*
                 Toast.makeText(finalConvertView.getContext()
                         , "Button PRESS id is " + childPosition
                         //, childText.getText()
                         , Toast.LENGTH_SHORT).show();
-
                 KeyValueDB.setIntId(context, childPosition);
+                */
+
+                int itemIndex = childPosition;
+
+                restaurantName = rNames[itemIndex];
+                //restaurantAddress = rAddresses[itemIndex];
+                restaurantPhone = rPhones[itemIndex];
+                //restaurantURL = rURLs[itemIndex];
+                restaurantAddress1 = rAddresses1[itemIndex];
+                restaurantAddress2 = rAddresses2[itemIndex];
+                restaurantAddress3 = rAddresses3[itemIndex];
+                restaurantCity = rCities[itemIndex];
+                restaurantState = rStates[itemIndex];
+                restaurantCountry = rCountries[itemIndex];
+                restaurantZipCode = rZipCodes[itemIndex];
+                restaurantLatitude = rLatitudes[itemIndex];
+                restaurantLongitude = rLongitudes[itemIndex];
+                //restaurantIsOpen = rIsOpen[itemIndex];
+                restaurantPrice = rPrice[itemIndex];
+                restaurantRating = rRating[itemIndex];
+
+                Intent showInfoIntent = new Intent(context, RestInfoActivity.class);
+
+                // pass restaurant info to the activity
+                showInfoIntent.putExtra("name", restaurantName);
+                showInfoIntent.putExtra("phone", restaurantPhone);
+                showInfoIntent.putExtra("address1", restaurantAddress1);
+                showInfoIntent.putExtra("address2", restaurantAddress2);
+                showInfoIntent.putExtra("address3", restaurantAddress3);
+                showInfoIntent.putExtra("city", restaurantCity);
+                showInfoIntent.putExtra("state", restaurantState);
+                showInfoIntent.putExtra("country", restaurantCountry);
+                showInfoIntent.putExtra("zipcode", restaurantZipCode);
+                showInfoIntent.putExtra("latitude", Double.toString(restaurantLatitude));
+                showInfoIntent.putExtra("longitude", Double.toString(restaurantLongitude));
+                //showInfoIntent.putExtra("url", restaurantURL);
+                //showInfoIntent.putExtra("isopen", restaurantIsOpen);
+                showInfoIntent.putExtra("price", restaurantPrice);
+                showInfoIntent.putExtra("rating", restaurantRating);
+
+                context.startActivity(showInfoIntent);
             }
         });
-        */
 
+        /*
         childText.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 Toast.makeText(finalConvertView.getContext()
                         , "item id is " + childPosition
                         //, childText.getText()
@@ -144,17 +216,18 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
                 KeyValueDB.setIntId(context, childPosition);
             }
         });
+        */
 
         return convertView;
     }
 
-    //checks if child is selectable
+    // checks if child is selectable
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
     }
 
-    //fiters data
+    // filters data
     public void filterData(String query){
         query = query.toLowerCase();
         parentRowList.clear();

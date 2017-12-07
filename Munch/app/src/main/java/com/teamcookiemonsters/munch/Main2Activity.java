@@ -73,23 +73,23 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
     //SearchResponse response;
 
     // data arrays for items to be listed and displayed in search results
-    String[] rNames = new String[20];
+    public static String[] rNames = new String[20];
     //Object[] rAddresses = new Object[20];
-    String[] rPhones = new String[20];
+    public static String[] rPhones = new String[20];
     //String[] rURLs = new String[20];
-    String[] rImageURLs = new String[20];
-    String[] rAddresses1 = new String[20];
-    String[] rAddresses2 = new String[20];
-    String[] rAddresses3 = new String[20];
-    String[] rCities = new String[20];
-    String[] rStates = new String[20];
-    String[] rCountries = new String[20];
-    String[] rZipCodes = new String[20];
-    Double[] rLatitudes = new Double[20];
-    Double[] rLongitudes = new Double[20];
+    public static String[] rImageURLs = new String[20];
+    public static String[] rAddresses1 = new String[20];
+    public static String[] rAddresses2 = new String[20];
+    public static String[] rAddresses3 = new String[20];
+    public static String[] rCities = new String[20];
+    public static String[] rStates = new String[20];
+    public static String[] rCountries = new String[20];
+    public static String[] rZipCodes = new String[20];
+    public static Double[] rLatitudes = new Double[20];
+    public static Double[] rLongitudes = new Double[20];
     //Boolean[] rIsOpen = new Boolean[20];
-    String[] rPrice = new String[20];
-    Double[] rRating = new Double[20];
+    public static String[] rPrice = new String[20];
+    public static Double[] rRating = new Double[20];
 
     // data place holders for a restaurant to be looked at
     public int randomIndex;
@@ -321,12 +321,6 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         return randInt;
     }
 
-    private int getItemIndex() {
-        int index = KeyValueDB.getIntId(getApplicationContext());
-        //int index = listAdapter.childIndex;
-        return index;
-    }
-
     //creates options menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -365,50 +359,6 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         listAdapter.filterData(newText);
         expandAll();
         return false;
-    }
-
-    public void launchRestInfo(View v) {
-        //ExpandableListView
-        int itemIndex = getItemIndex();
-        Toast.makeText(getApplicationContext(), "index is: " + itemIndex, Toast.LENGTH_SHORT).show();
-
-        restaurantName = rNames[itemIndex];
-        //restaurantAddress = rAddresses[itemIndex];
-        restaurantPhone = rPhones[itemIndex];
-        //restaurantURL = rURLs[itemIndex];
-        restaurantAddress1 = rAddresses1[itemIndex];
-        restaurantAddress2 = rAddresses2[itemIndex];
-        restaurantAddress3 = rAddresses3[itemIndex];
-        restaurantCity = rCities[itemIndex];
-        restaurantState = rStates[itemIndex];
-        restaurantCountry = rCountries[itemIndex];
-        restaurantZipCode = rZipCodes[itemIndex];
-        restaurantLatitude = rLatitudes[itemIndex];
-        restaurantLongitude = rLongitudes[itemIndex];
-        //restaurantIsOpen = rIsOpen[itemIndex];
-        restaurantPrice = rPrice[itemIndex];
-        restaurantRating = rRating[itemIndex];
-
-        Intent showInfoIntent = new Intent(Main2Activity.this, RestInfoActivity.class);
-
-        // pass restaurant info to the activity
-        showInfoIntent.putExtra("name", restaurantName);
-        showInfoIntent.putExtra("phone", restaurantPhone);
-        showInfoIntent.putExtra("address1", restaurantAddress1);
-        showInfoIntent.putExtra("address2", restaurantAddress2);
-        showInfoIntent.putExtra("address3", restaurantAddress3);
-        showInfoIntent.putExtra("city", restaurantCity);
-        showInfoIntent.putExtra("state", restaurantState);
-        showInfoIntent.putExtra("country", restaurantCountry);
-        showInfoIntent.putExtra("zipcode", restaurantZipCode);
-        showInfoIntent.putExtra("latitude", Double.toString(restaurantLatitude));
-        showInfoIntent.putExtra("longitude", Double.toString(restaurantLongitude));
-        //showInfoIntent.putExtra("url", restaurantURL);
-        //showInfoIntent.putExtra("isopen", restaurantIsOpen);
-        showInfoIntent.putExtra("price", restaurantPrice);
-        showInfoIntent.putExtra("rating", restaurantRating);
-
-        startActivity(showInfoIntent);
     }
 
     //gets yelp data
