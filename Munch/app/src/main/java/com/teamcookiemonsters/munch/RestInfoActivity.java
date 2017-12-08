@@ -73,8 +73,8 @@ public class RestInfoActivity extends AppCompatActivity {
         //zipcodeText.setText(zipcode);
         //urlText.setText(url);
         //isopenText.setText(isopen);
-        priceText.setText(price);
-        ratingText.setText(ratingString);
+        priceText.setText("Price: " + price);
+        ratingText.setText("Rating: " + ratingString);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(name);

@@ -16,25 +16,46 @@
         android:orientation="vertical"
         >
 
-        <!-- address -->
+        <!-- reason -->
         <TextView
-            android:id="@+id/address_text"
-            android:hint="123 Address\nGoes, Here\n123"
+            android:id="@+id/reason_text"
+            android:hint="Eventually your reason will be here!"
+            android:textStyle="italic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:layout_margin="@dimen/text_margin"
-            />
+            android:textSize="18sp"
+            android:layout_margin="16dp"/>
 
-        <!-- phone number -->
-        <TextView
-            android:id="@+id/phone_text"
-            android:hint="(123)456-7890"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:layout_gravity="right"
-            />
+            android:paddingLeft="16dp"
+            android:paddingTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:divider="@drawable/divider">
+
+            <!-- address -->
+            <TextView
+                android:id="@+id/address_text"
+                android:hint="1234 The Address\nGoes, Here\n12345"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                />
+
+            <!-- phone number -->
+            <TextView
+                android:id="@+id/phone_text"
+                android:hint="(123) 456-7890"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="80dp"
+                android:layout_gravity="left"
+                />
+
+        </LinearLayout>
 
         <!-- is open? -->
         <!--
@@ -52,17 +73,19 @@
             android:hint="$$$"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="18dp"
             android:layout_margin="@dimen/text_margin"
-            android:layout_gravity="right"
+            android:layout_gravity="left"
             />
 
         <TextView
             android:id="@+id/rating_text"
             android:hint="5.0"
+            android:textSize="18dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:layout_gravity="right"
+            android:layout_gravity="left"
             />
 
     </LinearLayout>
