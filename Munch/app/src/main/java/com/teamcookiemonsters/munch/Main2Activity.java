@@ -29,6 +29,7 @@ import com.yelp.fusion.client.models.SearchResponse;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.lang.*;
@@ -448,4 +449,26 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
             return null;
         }
     }
+
+    /*
+    // clears arrays on back press
+    public void onBackPressed() {
+        Arrays.fill(rNames, null);
+        Arrays.fill(rPhones, null);
+        Arrays.fill(rImageURLs, null);
+        Arrays.fill(rAddresses1, null);
+        Arrays.fill(rAddresses2, null);
+        Arrays.fill(rAddresses3, null);
+        Arrays.fill(rCities, null);
+        Arrays.fill(rStates, null);
+        Arrays.fill(rCountries, null);
+        Arrays.fill(rZipCodes, null);
+        Arrays.fill(rLatitudes, null);
+        Arrays.fill(rLongitudes, null);
+        Arrays.fill(rPrice, null);
+        Arrays.fill(rRating, null);
+
+        finish();
+    }
+    */
 }

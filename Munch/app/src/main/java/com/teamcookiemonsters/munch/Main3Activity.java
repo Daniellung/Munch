@@ -60,17 +60,17 @@ public class Main3Activity extends AppCompatActivity implements View.OnClickList
 
         if(TextUtils.isEmpty(email)){
             //empty email
-            Toast.makeText(this, "Please enter your email", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter your email.", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if(TextUtils.isEmpty(password)){
             //empty password
-            Toast.makeText(this, "Please enter your password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter your password.", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        progressDialog.setMessage("registering user");
+        progressDialog.setMessage("Registering user...");
         progressDialog.show();
 
         firebaseAuth.createUserWithEmailAndPassword(email, password)
@@ -83,9 +83,10 @@ public class Main3Activity extends AppCompatActivity implements View.OnClickList
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             }
                             //register success, logged in auto
-                            Toast.makeText(Main3Activity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Main3Activity.this, "Registered successfully.", Toast.LENGTH_SHORT).show();
                         } else{
-                            Toast.makeText(Main3Activity.this, "Could not register", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Main3Activity.this, "Could not register.", Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
                         }
                     }
                 });  

@@ -26,7 +26,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".Main3Activity"
+        <activity android:name=".LoginActivity"
             android:label="Munch">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,7 +49,7 @@
             android:name=".RestInfoActivity"
             android:label="@string/title_activity_rest_info"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".Main3Activity"></activity>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.teamcookiemonsters.munch;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private static final int ERROR_DOALOG_REQUEST = 9001;
+    private ProgressDialog progressDialog;
 
     private static final String FINE_LOCATION = android.Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COARSE_LOCATION = android.Manifest.permission.ACCESS_COARSE_LOCATION;
@@ -46,21 +48,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        progressDialog = new ProgressDialog(this);
+
         getLocationPermission();
 
         if(isServicesOK()){
             init();
         }
 
-
         // initialize button
         Button goSearch = (Button) findViewById(R.id.button1);
         Button goPref = (Button) findViewById(R.id.button4);
-        // set up listener
 
+
+
+        // set up listener
         goSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressDialog.setMessage("Searching...");
+                progressDialog.show();
 
                 mEdit   = (EditText)findViewById(R.id.searchText);
                 text = mEdit.getText().toString();
@@ -82,6 +89,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        progressDialog.dismiss();
     }
 
     private void init(){
