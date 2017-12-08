@@ -66,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
                 text = mEdit.getText().toString();
                 SearchItem newSearch = new SearchItem();
                 newSearch.setSearch(text);
+                newSearch.setStart(0);
+                newSearch.setLength(0);
                 Intent intent = new Intent(MainActivity.this, Main2Activity.class);
                 intent.putExtra("Search", newSearch);
                 startActivity(intent);

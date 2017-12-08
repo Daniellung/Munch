@@ -10,21 +10,32 @@ import java.io.Serializable;
 
 public class SearchItem implements Serializable {
     public static String search;
+    public static int start;
+    public static int length;
 
-    // empty constructor
     public SearchItem() {};
 
-    // constructor
-    public SearchItem(String input){
+    public SearchItem(String input, int startInput){
         search = input;
+        start = startInput;
     }
 
-    // returns search string
     public String getSearch() {return search;}
 
-    // sets search string
     public void setSearch(String actSearch) {
         search = actSearch;
+    }
+
+    public int getStart() {return start;}
+
+    public void setStart(int startInput) {
+        start = startInput;
+    }
+
+    public int getLength() {return length;}
+
+    public void setLength(int lengthInput) {
+        length = lengthInput;
     }
 }
 

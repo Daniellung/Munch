@@ -68,28 +68,32 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
     public YelpFusionApi mYelpFusionApi;
     public YelpFusionApiFactory apiFactory;
     public Map<String, String> mParams;
-    public static int listDisplay = 0;
-    public static int listEnd = 14;
+    public static int listDisplay;
+    public static int listEnd;
+    public int listLength;
+    public int realListLength;
+    public static int size = 15;
+
     //SearchResponse response;
 
     // data arrays for items to be listed and displayed in search results
-    public static String[] rNames = new String[20];
+    public static String[] rNames = new String[size];
     //Object[] rAddresses = new Object[20];
-    public static String[] rPhones = new String[20];
+    public static String[] rPhones = new String[size];
     //String[] rURLs = new String[20];
-    public static String[] rImageURLs = new String[20];
-    public static String[] rAddresses1 = new String[20];
-    public static String[] rAddresses2 = new String[20];
-    public static String[] rAddresses3 = new String[20];
-    public static String[] rCities = new String[20];
-    public static String[] rStates = new String[20];
-    public static String[] rCountries = new String[20];
-    public static String[] rZipCodes = new String[20];
-    public static Double[] rLatitudes = new Double[20];
-    public static Double[] rLongitudes = new Double[20];
+    public static String[] rImageURLs = new String[size];
+    public static String[] rAddresses1 = new String[size];
+    public static String[] rAddresses2 = new String[size];
+    public static String[] rAddresses3 = new String[size];
+    public static String[] rCities = new String[size];
+    public static String[] rStates = new String[size];
+    public static String[] rCountries = new String[size];
+    public static String[] rZipCodes = new String[size];
+    public static Double[] rLatitudes = new Double[size];
+    public static Double[] rLongitudes = new Double[size];
     //Boolean[] rIsOpen = new Boolean[20];
-    public static String[] rPrice = new String[20];
-    public static Double[] rRating = new Double[20];
+    public static String[] rPrice = new String[size];
+    public static Double[] rRating = new Double[size];
 
     // data place holders for a restaurant to be looked at
     public int randomIndex;
@@ -112,6 +116,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
 
     public String sOpenNow;
     public String sDollars;
+    public SearchItem search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,8 +124,10 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         setContentView(R.layout.activity_main2);
 
         Intent intent = getIntent();
-        SearchItem search = (SearchItem)intent.getSerializableExtra("Search");
+        search = (SearchItem)intent.getSerializableExtra("Search");
         String text = search.getSearch();
+        listDisplay = search.getStart();
+        listLength = search.getLength();
 
 
         apiFactory = new YelpFusionApiFactory();
@@ -156,6 +163,8 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         mParams.put("term", text);
         mParams.put("latitude", lat);
         mParams.put("longitude", lon);
+        mParams.put("limit", "44");
+        mParams.put("radius", "15000");
         mParams.put("open_now", sOpenNow);
         mParams.put("price", sDollars);
         new GetData().execute();
@@ -170,6 +179,8 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         mParams.put("term", text);
         mParams.put("latitude", "37.000353");
         mParams.put("longitude", "-122.06314429999998");
+        mParams.put("limit", "44");
+        mParams.put("radius", "15000");
         mParams.put("open_now", sOpenNow);
         mParams.put("price", sDollars);
         new GetData().execute();
@@ -180,7 +191,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         // API search delay timer
         try {
             // thread to sleep for 1000 milliseconds
-            Thread.sleep(8000);
+            Thread.sleep(4000);
         } catch (Exception e) {
             Toast.makeText(this,"Didnt Work",Toast.LENGTH_LONG).show();
         }
@@ -210,6 +221,30 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         displayList();
         //expands the list of contents
         expandAll();
+
+        Button nextButton = (Button) findViewById(R.id.right_button);
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Intent naviIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/"));
+                //startActivity(naviIntent);
+                //EditText mEdit;
+                //String text;
+                //mEdit = (EditText)findViewById(R.id.searchText);
+                //text = mEdit.getText().toString();
+                //SearchItem newSearch = new SearchItem();
+                //newSearch.setSearch(text);
+                if(listLength > size) {
+                    search.setStart(listDisplay + size);
+                    search.setLength(listLength - size);
+                }
+                Intent intent = new Intent(Main2Activity.this, Main2Activity.class);
+                intent.putExtra("Search", search);
+                finish();
+                startActivity(intent);
+            }
+        });
 
         //Button viewButton = (Button) findViewById(R.id.munch_button);
         //ExpandableListView lv = (ExpandableListView) findViewById(R.id.results_list);
@@ -285,7 +320,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
                 , testOne));
         */
 
-        for(int i = listDisplay; i < listEnd; i++){
+        for(int i = 0; i < size; i++){
             childRows.add(new ChildRow(R.mipmap.ic_launcher_round, rNames[i]));
         }
 
@@ -314,8 +349,8 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
 
     // gets random integer for the index i in rNames[i] which is the list used to display search results
     private int getRandomInt() {
-        int min = listDisplay + 1;
-        int max = listEnd;
+        int min = 1;
+        int max = listLength;
         Random rand = new Random();
         int randInt = rand.nextInt((max-min)+1)+min;
         return randInt;
@@ -375,25 +410,39 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
             }
             //loads data into lists
             if(response != null){
-                for(int i = listDisplay; i < listEnd; i++) {
-                    Log.v("Businesses", response.body().getBusinesses().get(i).getName());
-                    rNames[i] = response.body().getBusinesses().get(i).getName();
-                    //rAddresses[i] = response.body().getBusinesses().get(i).getLocation();
-                    rPhones[i] = response.body().getBusinesses().get(i).getDisplayPhone();
-                    //rURLs[i] = response.body().getBusinesses().get(i).getUrl();
-                    rImageURLs[i] = response.body().getBusinesses().get(i).getImageUrl();
-                    rAddresses1[i] = response.body().getBusinesses().get(i).getLocation().getAddress1();
-                    rAddresses2[i] = response.body().getBusinesses().get(i).getLocation().getAddress2();
-                    rAddresses3[i] = response.body().getBusinesses().get(i).getLocation().getAddress3();
-                    rCities[i] = response.body().getBusinesses().get(i).getLocation().getCity();
-                    rStates[i] = response.body().getBusinesses().get(i).getLocation().getState();
-                    rCountries[i] = response.body().getBusinesses().get(i).getLocation().getCountry();
-                    rZipCodes[i] = response.body().getBusinesses().get(i).getLocation().getZipCode();
-                    rLatitudes[i] = response.body().getBusinesses().get(i).getCoordinates().getLatitude();
-                    rLongitudes[i] = response.body().getBusinesses().get(i).getCoordinates().getLongitude();
-                    //rIsOpen[i] = response.body().getBusinesses().get(i).getHours().get(i).getIsOpenNow();
-                    rPrice[i] = response.body().getBusinesses().get(i).getPrice();
-                    rRating[i] = response.body().getBusinesses().get(i).getRating();
+                int i = 0;
+                if(listLength == 0){
+                    listLength = response.body().getBusinesses().size();
+                }
+                for(int k = listDisplay; k < (listLength + listDisplay); k++) {
+                    if(listLength < size){
+                        realListLength = listLength;
+                    }
+                    if(i == size){
+                        realListLength = i;
+                        break;
+                    }
+                    if(response.body().getBusinesses().get(k).getName() != null) {
+                        Log.v("Businesses", response.body().getBusinesses().get(k).getName());
+                        rNames[i] = response.body().getBusinesses().get(k).getName();
+                        //rAddresses[i] = response.body().getBusinesses().get(i).getLocation();
+                        rPhones[i] = response.body().getBusinesses().get(k).getDisplayPhone();
+                        //rURLs[i] = response.body().getBusinesses().get(i).getUrl();
+                        rImageURLs[i] = response.body().getBusinesses().get(k).getImageUrl();
+                        rAddresses1[i] = response.body().getBusinesses().get(k).getLocation().getAddress1();
+                        rAddresses2[i] = response.body().getBusinesses().get(k).getLocation().getAddress2();
+                        rAddresses3[i] = response.body().getBusinesses().get(k).getLocation().getAddress3();
+                        rCities[i] = response.body().getBusinesses().get(k).getLocation().getCity();
+                        rStates[i] = response.body().getBusinesses().get(k).getLocation().getState();
+                        rCountries[i] = response.body().getBusinesses().get(k).getLocation().getCountry();
+                        rZipCodes[i] = response.body().getBusinesses().get(k).getLocation().getZipCode();
+                        rLatitudes[i] = response.body().getBusinesses().get(k).getCoordinates().getLatitude();
+                        rLongitudes[i] = response.body().getBusinesses().get(k).getCoordinates().getLongitude();
+                        //rIsOpen[i] = response.body().getBusinesses().get(i).getHours().get(i).getIsOpenNow();
+                        rPrice[i] = response.body().getBusinesses().get(k).getPrice();
+                        rRating[i] = response.body().getBusinesses().get(k).getRating();
+                    }
+                    i++;
                 }
             }
             return null;
