@@ -131,6 +131,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         listLength = search.getLength();
 
 
+        // Setting up Yelp access
         apiFactory = new YelpFusionApiFactory();
         try {
             //yelpFusionApi = apiFactory.createAPI(clientID, clientSecret);
@@ -225,6 +226,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
 
         Button nextButton = (Button) findViewById(R.id.right_button);
 
+        // Next button for updated page info
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
