@@ -324,7 +324,9 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
         */
 
         for(int i = 0; i < size; i++){
-            childRows.add(new ChildRow(R.mipmap.ic_launcher_round, rNames[i]));
+            if(rNames[i] != null) {
+                childRows.add(new ChildRow(R.mipmap.ic_launcher_round, rNames[i]));
+            }
         }
 
         parentRow = new ParentRow("Restaurant", childRows);
