@@ -16,9 +16,9 @@ Table of Contents
 3.4 Class declaration
 4 Formatting
 4.1 Braces
-4.2 Block indentation: +2 spaces
+4.2 Block indentation: +4 spaces
 4.3 One statement per line
-4.4 Column limit: 100
+4.4 Column limit: 140
 4.5 Line-wrapping
 4.6 Whitespace
 4.7 Grouping parentheses: recommended
@@ -159,7 +159,7 @@ Terminology Note: block-like construct refers to the body of a class, method or 
 
 4.1.1 Braces are used where optional
 
-Braces are used with if, else, for, do and while statements, even when the body is empty or contains only a single statement.
+Braces are used with if, else, for, do and while statements, except when the body is empty or contains only a single statement.
 
 4.1.2 Nonempty blocks: K & R style
 
@@ -210,7 +210,7 @@ Examples:
   try {
     doSomething();
   } catch (Exception e) {}
-4.2 Block indentation: +2 spaces
+4.2 Block indentation: +4 spaces
 
 Each time a new block or block-like construct is opened, the indent increases by two spaces. When the block ends, the indent returns to the previous indent level. The indent level applies to both code and comments throughout the block. (See the example in Section 4.1.2, Nonempty blocks: K & R Style.)
 
@@ -218,9 +218,9 @@ Each time a new block or block-like construct is opened, the indent increases by
 
 Each statement is followed by a line break.
 
-4.4 Column limit: 100
+4.4 Column limit: 140
 
-Java code has a column limit of 100 characters. A "character" means any Unicode code point. Except as noted below, any line that would exceed this limit must be line-wrapped, as explained in Section 4.5, Line-wrapping.
+Java code has a column limit of 140 characters. A "character" means any Unicode code point. Except as noted below, any line that would exceed this limit must be line-wrapped, as explained in Section 4.5, Line-wrapping.
 
 Each Unicode code point counts as one character, even if its display width is greater or less. For example, if using fullwidth characters, you may choose to wrap the line earlier than where this rule strictly requires.
 

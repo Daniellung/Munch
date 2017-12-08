@@ -14,16 +14,27 @@ import android.widget.Toast;
 
 
 public class Main4Activity extends AppCompatActivity {
-    CheckBox OpenNow, Dollar1, Dollar2, Dollar3, Dollar4;
+
+    // Creates 5 checkboxes for OpenNow and Price Levels
+    CheckBox OpenNow;
+    CheckBox Dollar1;
+    CheckBox Dollar2;
+    CheckBox Dollar3;
+    CheckBox Dollar4;
+
+    // Default Boolean values for the checkboxes
     boolean bOpenNow = false;
     boolean bDollar1 = true;
     boolean bDollar2 = true;
     boolean bDollar3 = true;
     boolean bDollar4 = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main4);
+
+        //Sets Checkboxes attached to xml
         OpenNow = (CheckBox) findViewById(R.id.checkBox1);
         //OpenNow.setChecked(false);
         OpenNow.setOnClickListener(PrefListen);
@@ -95,10 +106,12 @@ public class Main4Activity extends AppCompatActivity {
 
     };
 
+    // Saves the preferences for the app onBackPressed into SharedPreferences
     public void onBackPressed(){
         //System.out.println(bOpenNow + " " + bDollar1 + " " + bDollar2 + " " + bDollar3+ " " + bDollar4);
         String sOpenNow = Boolean.toString(bOpenNow);
         String sDollars = dollarsignconvert();
+        // Checks for bad input and forces it to default input
         if(sDollars.equals("bad input")){
             Toast.makeText(Main4Activity.this, "Warning!! If no price level is chosen the app will default to all price levels.", Toast.LENGTH_SHORT).show();
             sDollars = "1,2,3,4";
@@ -112,6 +125,7 @@ public class Main4Activity extends AppCompatActivity {
         finish();
     }
 
+    // Converts the 4 different price levels into a string that can be accepted by Yelp API
     public String dollarsignconvert (){
         if(bDollar1 && !(bDollar2) && !(bDollar3) && !(bDollar4)) return "1";
         else if(!(bDollar1) && bDollar2 && !(bDollar3) && !(bDollar4)) return "2";
@@ -128,6 +142,7 @@ public class Main4Activity extends AppCompatActivity {
         else if(bDollar1 && !(bDollar2) && bDollar3 && bDollar4) return "1,3,4";
         else if(!(bDollar1) && bDollar2 && bDollar3 && bDollar4) return "2,3,4";
         else if(bDollar1 && bDollar2 && bDollar3 && bDollar4) return "1,2,3,4";
+        // bad input causes default to be used
         else return "bad input";
     }
 
