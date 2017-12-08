@@ -8,23 +8,19 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="110dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:background="#ffff"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <ImageView
             android:src="@mipmap/munch_logo_full"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
             android:layout_gravity="center"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginTop="100dp"/>
 
         <EditText
             android:id="@+id/editTextEmail"
@@ -38,7 +34,9 @@
             android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
             android:hint="Enter your password"
             android:inputType="textPassword" />
 
@@ -46,6 +44,8 @@
             android:id="@+id/buttonSignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:text="Sign in" />
 
         <TextView
@@ -55,10 +55,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-
-
     </LinearLayout>
-
-
 
 </android.support.constraint.ConstraintLayout>

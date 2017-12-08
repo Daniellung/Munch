@@ -11,13 +11,13 @@
 
         <ImageView
             android:id="@+id/child_icon"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:paddingLeft="3dp"
             android:paddingRight="3dp"
-            android:layout_gravity="center"
-            android:src="@mipmap/ic_launcher_round"
+            android:src="@mipmap/munch_logo_burger"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
             />
 
         <TextView

@@ -351,7 +351,7 @@ public class Main2Activity extends AppCompatActivity implements SearchView.OnQue
     // gets random integer for the index i in rNames[i] which is the list used to display search results
     private int getRandomInt() {
         int min = 1;
-        int max = listLength;
+        int max = size;
         Random rand = new Random();
         int randInt = rand.nextInt((max-min)+1)+min;
         return randInt;

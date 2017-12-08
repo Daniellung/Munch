@@ -27,7 +27,8 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".LoginActivity"
-            android:label="Munch">
+            android:label="Munch"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -43,13 +44,17 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity android:name=".Main2Activity" />
-        <activity android:name=".Main4Activity" />
+        <activity android:name=".Main4Activity"
+            android:label="Preferences"
+            />
         <activity android:name=".MapActivity" />
         <activity
             android:name=".RestInfoActivity"
             android:label="@string/title_activity_rest_info"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Main3Activity"></activity>
+        <activity android:name=".Main3Activity"
+            android:label="Register">
+        </activity>
     </application>
 
 </manifest>
