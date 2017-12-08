@@ -19,6 +19,7 @@
         <!-- address -->
         <TextView
             android:id="@+id/address_text"
+            android:hint="123 Address\nGoes, Here\n123"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
@@ -28,6 +29,7 @@
         <!-- phone number -->
         <TextView
             android:id="@+id/phone_text"
+            android:hint="(123)456-7890"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
@@ -47,21 +49,21 @@
 
         <TextView
             android:id="@+id/price_text"
+            android:hint="$$$"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
             android:layout_gravity="right"
             />
-        -->
 
         <TextView
             android:id="@+id/rating_text"
+            android:hint="5.0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
             android:layout_gravity="right"
             />
-        -->
 
     </LinearLayout>
 

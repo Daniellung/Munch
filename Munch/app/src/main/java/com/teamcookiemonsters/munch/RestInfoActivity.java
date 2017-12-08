@@ -80,17 +80,7 @@ public class RestInfoActivity extends AppCompatActivity {
         toolbar.setTitle(name);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-
-        Button goMap = (Button) findViewById(R.id.mapbutton);
+        FloatingActionButton goMap = (FloatingActionButton) findViewById(R.id.map_fab);
         goMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
